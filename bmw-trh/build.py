@@ -100,6 +100,7 @@ def brand_of(title):
     for b in OTHER:
         if b.lower() in t.lower(): return b
     return "BMW"
+portal_od = {c["vin"]: c["created"] for c in used if c.get("vin") and c.get("created")}
 stock_rows = []
 for c in stock:
     c["brand"] = brand_of(c["title"])
@@ -116,7 +117,7 @@ for c in stock:
         "cena": pr or "", "cena_bez_dph": c.get("priceNoVat") or "", "cennikova_cena": lp or "",
         "zlava": c.get("discount") or (lp - pr if lp and pr and lp > pr else ""),
         "zlava_pct": round(100 * (lp - pr) / lp, 1) if lp and pr and lp > pr else "",
-        "url": c["url"],
+        "url": c["url"], "v_ponuke_od": portal_od.get(c["vin"] or "", ""),
     })
 
 # ---------- porovnanie so včerajškom ----------
@@ -137,7 +138,8 @@ def diff(src, rows, key_state):
         p = prev.get(k)
         sold_flag = r.get("stav") == "predané"
         res_flag = r.get("rezervovane") == "áno" or r.get("stav") == "rezervované"
-        cur[k] = {"first_seen": p["first_seen"] if p else (r.get("v_ponuke_od") or day), "cena": r["cena"],
+        fs = min(x for x in [p["first_seen"] if p else None, r.get("v_ponuke_od") or None, day] if x)
+        cur[k] = {"first_seen": fs, "cena": r["cena"],
                   "sold": sold_flag, "reserved": res_flag, "nazov": r["nazov"], "model": r["model"],
                   "dealer": r["dealer"], "vin": r["vin"], "typ": r.get("typ", "Jazdené"),
                   "motorizacia": r.get("motorizacia", ""), "palivo": r.get("palivo", ""), "rok": r.get("rok", ""),
@@ -175,6 +177,7 @@ fr2 = diff("Weby dealerov", stock_rows, "stock")
 for r in stock_rows:  # dni v ponuke podľa prvého videnia
     r["prvy_krat_videne"] = state["stock"][f"{r['dealer']}|{r['vin']}"]["first_seen"]
     r["dni_v_ponuke"] = days(r["prvy_krat_videne"], day)
+    r["dni_zdroj"] = "portál BMW" if r.get("v_ponuke_od") else "od začiatku sledovania (19. 11. 2026)"
 state["last_day"] = day
 
 def write(name, rows, fields=None):
