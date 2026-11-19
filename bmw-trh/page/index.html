@@ -1,0 +1,768 @@
+<style>
+.bt-wrap{display:flex;flex-direction:column;gap:var(--cds-gap-xl);font-family:var(--font-anthropic-sans);color:var(--color-fg)}
+.bt-title{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0}
+.bt-lead{margin:var(--cds-gap-xs) 0 0;color:var(--color-fg);max-width:70ch}
+.bt-sub{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);margin:var(--cds-gap-xs) 0 0}
+.bt-filters{display:flex;flex-wrap:wrap;gap:var(--cds-gap-md);align-items:end}
+.bt-filters label{display:flex;flex-direction:column;gap:var(--cds-gap-xs);font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.bt-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--cds-gap-md)}
+.bt-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg)}
+.bt-card h3{margin:0;font-size:var(--cds-font-size-caption);font-weight:var(--cds-font-weight-medium);color:var(--color-fg-muted)}
+.bt-big{font-family:var(--font-anthropic-serif);font-weight:400;font-size:2rem;font-variant-numeric:tabular-nums;margin-top:var(--cds-gap-xs);min-height:1.2em}
+.bt-note{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-top:var(--cds-gap-xs)}
+.bt-sec h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 var(--cds-gap-xs)}
+.bt-sec p.bt-desc{margin:0 0 var(--cds-gap-md);color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);max-width:80ch}
+.bt-scroll{overflow-x:auto}
+.bt-table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:var(--cds-font-size-body)}
+.bt-table th,.bt-table td{padding:6px 10px;border-bottom:1px solid var(--color-border-line);text-align:right;white-space:nowrap}
+.bt-table th:first-child,.bt-table td:first-child,.bt-table .l{text-align:left}
+.bt-table th{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);font-weight:var(--cds-font-weight-medium);cursor:pointer;user-select:none}
+.bt-table tr.lion td{font-weight:var(--cds-font-weight-medium)}
+.bt-table td.good{color:var(--color-ok)} .bt-table td.bad{color:var(--color-bad)}
+.bt-table a{color:inherit}
+.bt-chart{position:relative;min-height:240px}
+.bt-tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);box-shadow:var(--cds-shadow-popover);border-radius:var(--cds-radius);padding:6px 10px;font-size:var(--cds-font-size-caption);white-space:nowrap;z-index:5}
+.bt-chart text{fill:var(--cds-text-secondary);font-size:var(--cds-font-size-caption)}
+.bt-empty{color:var(--color-fg-muted);font-size:var(--cds-font-size-body);padding:var(--cds-pad-md) 0}
+details.bt-def summary{cursor:pointer;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+details.bt-def div{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);max-width:80ch}
+</style>
+
+<div class="bt-wrap">
+  <header id="hlavicka">
+    <h1 class="bt-title">BMW trh Slovensko – sklad dealerov vs. Lion Car</h1>
+    <p class="bt-lead" data-draw="lead">—</p>
+    <p class="bt-sub">Zdroj: weby všetkých 10 predajných BMW dealerov (rovnaká platforma) a centrálny portál jazdených BMW (bezcakania.bmw.sk). Aktualizácia raz denne.</p>
+  </header>
+
+  <div class="bt-filters" id="filtre">
+    <label>Typ vozidla
+      <select class="dash-select" id="f-typ" aria-label="Typ vozidla">
+        <option value="Všetky">Všetky typy</option>
+        <option value="Nové">Nové</option>
+        <option value="Predvádzacie">Predvádzacie</option>
+        <option value="Manažérske">Manažérske</option>
+        <option value="Jazdené">Jazdené</option>
+      </select>
+    </label>
+    <label>Model
+      <select class="dash-select" data-draw="fmodel" aria-label="Model"></select>
+    </label>
+  </div>
+
+  <section class="bt-tiles" id="kpi">
+    <div class="bt-card" id="kpi-lion"><h3>Lion Car – vozidiel v ponuke</h3><div class="bt-big" data-draw="k_lion">—</div><div class="bt-note" data-draw="k_lion_n">—</div></div>
+    <div class="bt-card" id="kpi-trh"><h3>Konkurencia (9 dealerov)</h3><div class="bt-big" data-draw="k_konk">—</div><div class="bt-note">vozidiel v ponuke na ich weboch</div></div>
+    <div class="bt-card" id="kpi-podiel"><h3>Podiel Lion Car na ponuke</h3><div class="bt-big" data-draw="k_podiel">—</div><div class="bt-note">z celkovej ponuky BMW na trhu</div></div>
+    <div class="bt-card" id="kpi-zlava"><h3>Priemerná zľava z cenníka</h3><div class="bt-big" data-draw="k_zlava">—</div><div class="bt-note" data-draw="k_zlava_n">—</div></div>
+  </section>
+
+  <section class="bt-sec" id="dealeri">
+    <h2>Ponuka podľa dealerov</h2>
+    <p class="bt-desc">Počet vozidiel BMW na webe každého dealera pre zvolený typ a model. Bavaria BA+TT, T.O.B.+MD-Bavaria a Regnum PO+KE majú na weboch spoločný sklad, preto sú spolu.</p>
+    <div class="bt-chart" data-draw="ch_dealeri"></div>
+  </section>
+
+  <section class="bt-sec" id="modely">
+    <h2>Modely: Lion Car vs. konkurencia</h2>
+    <p class="bt-desc">Kliknite na hlavičku stĺpca pre zoradenie a na riadok pre detail motorizácií. Ceny sú mediány predajných cien s DPH, zľava = rozdiel oproti cenníkovej cene.</p>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-modely">
+        <thead><tr>
+          <th data-k="model">Model</th>
+          <th data-k="lion_ks">Lion Car ks</th>
+          <th data-k="konk_ks">Konkurencia ks</th>
+          <th data-k="podiel_pct">Podiel Lion %</th>
+          <th data-k="lion_cena">Lion medián €</th>
+          <th data-k="konk_cena">Konk. medián €</th>
+          <th data-k="lion_zlava_pct">Lion zľava %</th>
+          <th data-k="konk_zlava_pct">Konk. zľava %</th>
+        </tr></thead>
+        <tbody data-draw="t_modely"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bt-sec" id="motorizacie">
+    <h2>Motorizácie <span data-draw="h_motor">—</span></h2>
+    <p class="bt-desc">Rozpad podľa verzie a výkonu. Vyberte model vo filtri hore alebo kliknutím na riadok v tabuľke modelov.</p>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-motor">
+        <thead><tr>
+          <th data-k="motorizacia">Motorizácia</th>
+          <th data-k="palivo" class="l">Palivo</th>
+          <th data-k="lion_ks">Lion Car ks</th>
+          <th data-k="konk_ks">Konkurencia ks</th>
+          <th data-k="lion_cena">Lion medián €</th>
+          <th data-k="konk_cena">Konk. medián €</th>
+          <th data-k="konk_min">Konk. najlacnejšie €</th>
+          <th data-k="konk_zlava_pct">Konk. zľava %</th>
+        </tr></thead>
+        <tbody data-draw="t_motor"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bt-sec" id="vozidla">
+    <h2>Konkrétne vozidlá a vaša cenová pozícia <span data-draw="h_voz">—</span></h2>
+    <p class="bt-desc">Všetky autá zvoleného modelu u všetkých dealerov. Porovnateľné autá: pri nových rovnaká motorizácia (model, motor, pohon, výkon); pri jazdených, predvádzacích a manažérskych rovnaká motorizácia, rok ±1 a najazdené ±30 000 km. Poradie 1 = najlacnejšie z porovnateľných. Kliknutím na dealera otvoríte inzerát.</p>
+    <p class="bt-empty" id="voz-prompt">Vyberte model vo filtri hore (napr. X5) alebo kliknite na riadok v tabuľke modelov.</p>
+    <p class="bt-lead" data-draw="voz_sum">—</p>
+    <div class="bt-chart" data-draw="ch_voz" style="min-height:120px"></div>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-voz">
+        <thead><tr>
+          <th data-k="dealer" class="l">Dealer</th>
+          <th data-k="typ" class="l">Typ</th>
+          <th data-k="motorizacia" class="l">Motorizácia</th>
+          <th data-k="rok">Rok</th>
+          <th data-k="km">Km</th>
+          <th data-k="cena">Cena €</th>
+          <th data-k="cennikova_cena">Cenníková €</th>
+          <th data-k="zlava_pct">Zľava %</th>
+          <th data-k="poradie">Poradie ceny</th>
+          <th data-k="vs_median_pct">Oproti mediánu %</th>
+          <th data-k="stav" class="l">Stav</th>
+        </tr></thead>
+        <tbody data-draw="t_voz"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bt-sec" id="jazdene">
+    <h2>Jazdené BMW – cenová pozícia Lion Car</h2>
+    <p class="bt-desc">Z centrálneho portálu jazdených BMW (všetci dealeri). Ku každému vášmu jazdenému autu porovnanie s porovnateľnými autami konkurencie: rovnaký model a verzia, rok ±1, najazdené ±30 000 km.</p>
+    <div class="bt-tiles" style="margin-bottom:var(--cds-gap-md)">
+      <div class="bt-card" id="j-lion"><h3>Lion Car – jazdené na portáli</h3><div class="bt-big" data-draw="j_lion">—</div></div>
+      <div class="bt-card" id="j-trh"><h3>Celý trh – jazdené na portáli</h3><div class="bt-big" data-draw="j_trh">—</div></div>
+      <div class="bt-card" id="j-dni"><h3>Priemerne dní v ponuke</h3><div class="bt-big" data-draw="j_dni">—</div><div class="bt-note" data-draw="j_dni_n">—</div></div>
+    </div>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-pozicia">
+        <thead><tr>
+          <th data-k="nazov">Vozidlo</th>
+          <th data-k="rok">Rok</th>
+          <th data-k="km">Km</th>
+          <th data-k="cena">Naša cena €</th>
+          <th data-k="porovnatelne">Porovnateľné ks</th>
+          <th data-k="trh_median">Konk. medián €</th>
+          <th data-k="rozdiel_pct">Rozdiel %</th>
+          <th data-k="trh_min">Konk. najlacnejšie €</th>
+          <th data-k="dni_v_ponuke">Dní v ponuke</th>
+        </tr></thead>
+        <tbody data-draw="t_pozicia"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bt-sec" id="predaje">
+    <h2>Predaje na trhu – čo sa predáva a za koľko</h2>
+    <p class="bt-desc">Auto, ktoré dealer označí ako „Predané“ alebo ktoré zmizne z ponuky, sa počíta ako predané v daný deň. Ako predajná cena sa berie posledná známa cena v inzeráte. Každé auto sa počíta raz, aj keď bolo na webe dealera aj na portáli BMW. Rešpektuje filtre Typ a Model hore. Pri jazdených autách je „cenníková“ cena pôvodná cena auta ako nového, zľava je teda pokles hodnoty.</p>
+    <div class="bt-filters" style="margin-bottom:var(--cds-gap-md)">
+      <label>Obdobie
+        <select class="dash-select" id="f-obdobie" aria-label="Obdobie predajov">
+          <option value="1">Posledný deň</option>
+          <option value="7">Posledných 7 dní</option>
+          <option value="30" selected>Posledných 30 dní</option>
+          <option value="90">Posledných 90 dní</option>
+          <option value="9999">Celé sledované obdobie</option>
+        </select>
+      </label>
+    </div>
+    <p class="bt-empty" id="predaje-empty" hidden>Zatiaľ nie sú zaznamenané žiadne predaje. Sledovanie beží od 19. 11. 2026, prvé predaje sa objavia po rannej aktualizácii 20. 11.</p>
+    <div class="bt-tiles" style="margin-bottom:var(--cds-gap-md)">
+      <div class="bt-card" id="pr-lion"><h3>Predané – Lion Car</h3><div class="bt-big" data-draw="pr_lion">—</div><div class="bt-note" data-draw="pr_lion_n">—</div></div>
+      <div class="bt-card" id="pr-konk"><h3>Predané – konkurencia</h3><div class="bt-big" data-draw="pr_konk">—</div><div class="bt-note" data-draw="pr_konk_n">—</div></div>
+      <div class="bt-card" id="pr-podiel"><h3>Podiel Lion Car na predajoch</h3><div class="bt-big" data-draw="pr_podiel">—</div><div class="bt-note">z predaných áut v období</div></div>
+    </div>
+    <div class="bt-chart" data-draw="ch_predaje" style="min-height:0"></div>
+    <h3 class="bt-sub" id="predaje-modely-h" style="margin-top:var(--cds-gap-lg)">Predaje podľa modelu a motorizácie</h3>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-pr-modely">
+        <thead><tr>
+          <th data-k="kluc" class="l">Model · motorizácia</th>
+          <th data-k="lion">Lion Car ks</th>
+          <th data-k="konk">Konkurencia ks</th>
+          <th data-k="median">Medián predajnej ceny €</th>
+          <th data-k="min">Min €</th>
+          <th data-k="max">Max €</th>
+          <th data-k="zlava">Priem. zľava %</th>
+          <th data-k="dni">Priem. dní v ponuke</th>
+        </tr></thead>
+        <tbody data-draw="t_pr_modely"></tbody>
+      </table>
+    </div>
+    <h3 class="bt-sub" id="predaje-zoznam-h" style="margin-top:var(--cds-gap-lg)">Predané autá po dňoch</h3>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-predaje">
+        <thead><tr>
+          <th data-k="datum" class="l">Dátum</th>
+          <th data-k="dealer" class="l">Dealer</th>
+          <th data-k="typ" class="l">Typ</th>
+          <th data-k="motorizacia" class="l">Model · motorizácia</th>
+          <th data-k="rok">Rok</th>
+          <th data-k="km">Km</th>
+          <th data-k="cena">Posledná cena €</th>
+          <th data-k="cennikova_cena">Cenníková €</th>
+          <th data-k="zlava_pct">Zľava %</th>
+          <th data-k="dni_v_ponuke">Dní v ponuke</th>
+        </tr></thead>
+        <tbody data-draw="t_predaje"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bt-sec" id="dennik">
+    <h2>Denník zmien – predané, nové, rezervované, zmeny cien</h2>
+    <p class="bt-desc">Každý deň sa porovná ponuka so včerajškom. Auto, ktoré zmizne z ponuky, sa zapíše ako predané (najčastejšie ide o predaj, výnimočne o stiahnutie z ponuky). Weby dealerov navyše označujú autá štítkom „Predané“ a „Rezervované“.</p>
+    <div class="bt-tiles" style="margin-bottom:var(--cds-gap-md)" data-draw="ev_tiles"></div>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-udalosti">
+        <thead><tr>
+          <th class="l">Dátum</th>
+          <th class="l">Udalosť</th>
+          <th class="l">Dealer</th>
+          <th class="l">Vozidlo</th>
+          <th class="l">Typ</th>
+          <th>Cena pred €</th>
+          <th>Cena po €</th>
+          <th>Dní v ponuke</th>
+        </tr></thead>
+        <tbody data-draw="t_udalosti"></tbody>
+      </table>
+    </div>
+    <p class="bt-empty" id="ev-empty" hidden>Sledovanie zmien beží od 19. 11. 2026. Prvý deň je východiskový stav, prvé predaje a zmeny cien sa objavia po najbližšom dennom porovnaní.</p>
+  </section>
+
+  <section class="bt-sec" id="pozicia-dnes">
+    <h2>Vaša pozícia dnes – kde sme voči konkurencii a čo preceniť</h2>
+    <p class="bt-desc">Pre každý model priemerná odchýlka cien vašich áut od mediánu porovnateľných áut konkurencie (rovnaké pravidlá ako pri konkrétnych vozidlách). Zelená = ste lacnejší, červená = ste drahší o viac ako 5 %. Rešpektuje filter Typ.</p>
+    <div class="bt-chart" data-draw="ch_pozicia" style="min-height:160px"></div>
+
+    <h3 class="bt-sub" id="precenit-h" style="margin-top:var(--cds-gap-lg)">Autá na precenenie</h3>
+    <p class="bt-desc">Vaše autá, ktoré sú o viac ako 5 % nad mediánom aspoň 2 porovnateľných áut, alebo sú najdrahšie z porovnateľných, alebo sú v ponuke viac ako 90 dní. „Cena na úrovni trhu“ = medián porovnateľných áut.</p>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-precenit">
+        <thead><tr>
+          <th data-k="nazov" class="l">Vozidlo</th>
+          <th data-k="typ" class="l">Typ</th>
+          <th data-k="rok">Rok</th>
+          <th data-k="km">Km</th>
+          <th data-k="cena">Naša cena €</th>
+          <th data-k="median">Cena na úrovni trhu €</th>
+          <th data-k="rozdiel">Rozdiel €</th>
+          <th data-k="vs_median_pct">Odchýlka %</th>
+          <th data-k="poradie">Poradie</th>
+          <th data-k="dni_v_ponuke">Dní v ponuke</th>
+          <th class="l">Dôvod</th>
+        </tr></thead>
+        <tbody data-draw="t_precenit"></tbody>
+      </table>
+    </div>
+
+    <h3 class="bt-sub" id="dni-sklad-h" style="margin-top:var(--cds-gap-lg)">Dni v ponuke – autá na sklade podľa dealerov</h3>
+    <p class="bt-desc">Rozdelenie áut v ponuke podľa toho, ako dlho sú inzerované. Presný dátum zaradenia poznáme pri autách, ktoré sú aj na centrálnom portáli BMW (jazdené, mladé jazdené). Ostatné sledujeme od 19. 11. 2026, takže tie, ktoré už vtedy boli v ponuke, sú v sivom stĺpci „pred 19. 11.“ a s pribúdajúcimi dňami sa budú presúvať do presných skupín. Rešpektuje filtre Typ a Model.</p>
+    <div class="bt-chart" data-draw="ch_dni" style="min-height:200px"></div>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-dni">
+        <thead><tr>
+          <th data-k="dealer" class="l">Dealer</th>
+          <th data-k="ks">Áut v ponuke</th>
+          <th data-k="znamy">So známym dátumom</th>
+          <th data-k="median">Medián dní</th>
+          <th data-k="priemer">Priemer dní</th>
+          <th data-k="nad90">Nad 90 dní</th>
+          <th data-k="nad180">Nad 180 dní</th>
+        </tr></thead>
+        <tbody data-draw="t_dni"></tbody>
+      </table>
+    </div>
+
+    <h3 class="bt-sub" id="dni-predaj-h" style="margin-top:var(--cds-gap-lg)">Dni v ponuke v momente predaja (zmiznutia)</h3>
+    <p class="bt-desc">Koľko dní bolo auto inzerované, keď zmizlo z ponuky. Rešpektuje obdobie zo sekcie Predaje a filtre Typ a Model.</p>
+    <p class="bt-empty" id="dni-predaj-empty" hidden>Zatiaľ bez predajov – údaje pribudnú od rannej aktualizácie 20. 11.</p>
+    <div class="bt-scroll">
+      <table class="bt-table" id="t-dni-predaj">
+        <thead><tr>
+          <th data-k="dealer" class="l">Dealer</th>
+          <th data-k="ks">Predané ks</th>
+          <th data-k="median">Medián dní do predaja</th>
+          <th data-k="priemer">Priemer dní</th>
+          <th data-k="min">Najrýchlejšie</th>
+          <th data-k="max">Najdlhšie</th>
+          <th data-k="cena">Medián ceny €</th>
+        </tr></thead>
+        <tbody data-draw="t_dni_predaj"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <details class="bt-def" id="definicie">
+    <summary>Ako sa počítajú čísla</summary>
+    <div>
+      <p><b>Ponuka</b> = vozidlá BMW zobrazené na webe dealera v deň aktualizácie, okrem áut so štítkom „Predané“. MINI a iné značky sú vynechané.</p>
+      <p><b>Konkurencia</b> = 9 ostatných predajných BMW dealerov na Slovensku podľa oficiálneho vyhľadávača BMW. Skupiny so spoločným skladom na webe sa počítajú raz.</p>
+      <p><b>Zľava %</b> = (cenníková cena − predajná cena) / cenníková cena, len pri autách, kde dealer cenníkovú cenu uvádza.</p>
+      <p><b>Dní v ponuke</b> pri jazdených = od dátumu zaradenia na portál BMW. Pri webe dealerov od prvého dňa, keď sme auto videli.</p>
+    </div>
+  </details>
+</div>
+
+<script>
+// ---------- pomocné ----------
+window.BT = window.BT || {typ: 'Všetky', model: '', sort: {}};
+window.BT.fmt = (v, d = 0) => (v == null || v === '' ? '–' : (+v).toLocaleString('sk-SK', {maximumFractionDigits: d, minimumFractionDigits: d}));
+const TYPY = ['Všetky', 'Nové', 'Predvádzacie', 'Manažérske', 'Jazdené'];
+const numOrNull = (v) => (v === '' || v == null ? null : +v);
+const median0 = (a) => { const b = a.filter((x) => x != null).sort((x, y) => x - y); if (!b.length) return null; const h = b.length >> 1; return Math.round(b.length % 2 ? b[h] : (b[h - 1] + b[h]) / 2); };
+const avgZlava = (a) => { const b = a.map((r) => numOrNull(r.zlava_pct)).filter((x) => x != null); return b.length ? Math.round(10 * b.reduce((p, x) => p + x, 0) / b.length) / 10 : null; };
+const ponuka = (sklad) => sklad.filter((r) => r.znacka === 'BMW' && r.stav !== 'predané');
+
+// ---------- výpočty ----------
+dash.calc('kpi', {inputs: ['sklad'], fn: (sklad) => {
+  const rows = ponuka(sklad); const models = ['', ...new Set(rows.map((r) => r.model))]; const out = [];
+  for (const typ of TYPY) for (const model of models) {
+    const s = rows.filter((r) => (typ === 'Všetky' || r.typ === typ) && (!model || r.model === model));
+    const L = s.filter((r) => r.lion_car === 'áno'), K = s.filter((r) => r.lion_car !== 'áno');
+    out.push({typ, model: model || 'Všetky modely', lion_ks: L.length, konk_ks: K.length,
+      podiel_pct: s.length ? Math.round(1000 * L.length / s.length) / 10 : null, lion_zlava_pct: avgZlava(L), konk_zlava_pct: avgZlava(K),
+      lion_na_ceste: L.filter((r) => r.dostupnost === 'na ceste').length, lion_rezerv: L.filter((r) => r.stav === 'rezervované').length});
+  }
+  return out;
+}});
+
+dash.calc('dealeri', {inputs: ['sklad'], fn: (sklad) => {
+  const rows = ponuka(sklad); const models = ['', ...new Set(rows.map((r) => r.model))]; const dealers = [...new Set(sklad.map((r) => r.dealer))]; const out = [];
+  for (const typ of TYPY) for (const model of models) for (const dealer of dealers) {
+    const s = rows.filter((r) => r.dealer === dealer && (typ === 'Všetky' || r.typ === typ) && (!model || r.model === model));
+    out.push({typ, model: model || 'Všetky modely', dealer, ks: s.length, rezervovane: s.filter((r) => r.stav === 'rezervované').length, lion: dealer === 'LION CAR' ? 'áno' : 'nie'});
+  }
+  return out;
+}});
+
+dash.calc('modely', {inputs: ['sklad'], fn: (sklad) => {
+  const rows = ponuka(sklad); const out = []; const price = (r) => numOrNull(r.cena);
+  for (const typ of TYPY) {
+    const s = rows.filter((r) => typ === 'Všetky' || r.typ === typ);
+    for (const model of [...new Set(s.map((r) => r.model))]) {
+      const g = s.filter((r) => r.model === model); const L = g.filter((r) => r.lion_car === 'áno'), K = g.filter((r) => r.lion_car !== 'áno');
+      out.push({typ, model, lion_ks: L.length, konk_ks: K.length, podiel_pct: Math.round(1000 * L.length / g.length) / 10,
+        lion_cena: median0(L.map(price)), konk_cena: median0(K.map(price)), lion_zlava_pct: avgZlava(L), konk_zlava_pct: avgZlava(K)});
+    }
+  }
+  return out;
+}});
+
+dash.calc('motorizacie', {inputs: ['sklad'], fn: (sklad) => {
+  const rows = ponuka(sklad); const out = []; const price = (r) => numOrNull(r.cena);
+  for (const typ of TYPY) {
+    const s = rows.filter((r) => typ === 'Všetky' || r.typ === typ);
+    for (const k of [...new Set(s.map((r) => r.model + '\u0001' + r.motorizacia))]) {
+      const [model, motorizacia] = k.split('\u0001');
+      const g = s.filter((r) => r.model === model && r.motorizacia === motorizacia); const L = g.filter((r) => r.lion_car === 'áno'), K = g.filter((r) => r.lion_car !== 'áno');
+      const kp = K.map(price).filter((x) => x != null);
+      out.push({typ, model, motorizacia, palivo: g[0].palivo, lion_ks: L.length, konk_ks: K.length, lion_cena: median0(L.map(price)), konk_cena: median0(K.map(price)),
+        konk_min: kp.length ? Math.min(...kp) : null, konk_zlava_pct: avgZlava(K)});
+    }
+  }
+  return out;
+}});
+
+dash.calc('pozicia', {inputs: ['jazdene'], fn: (jazdene) => {
+  const b = jazdene.filter((r) => r.znacka === 'BMW'); const L = b.filter((r) => r.lion_car === 'áno'), K = b.filter((r) => r.lion_car !== 'áno');
+  return L.map((c) => {
+    const comp = K.filter((k) => k.motorizacia === c.motorizacia && Math.abs(+k.rok - +c.rok) <= 1 && Math.abs(+k.km - +c.km) <= 30000).map((k) => +k.cena).sort((x, y) => x - y);
+    const md = median0(comp);
+    return {vin: c.vin, nazov: c.nazov, model: c.model, rok: +c.rok, km: +c.km, cena: +c.cena, porovnatelne: comp.length, trh_median: md,
+      rozdiel_pct: md ? Math.round(1000 * (+c.cena - md) / md) / 10 : null, trh_min: comp.length ? comp[0] : null, dni_v_ponuke: numOrNull(c.dni_v_ponuke)};
+  });
+}});
+
+dash.calc('jazdene_kpi', {inputs: ['jazdene'], fn: (jazdene) => {
+  const b = jazdene.filter((r) => r.znacka === 'BMW'); const L = b.filter((r) => r.lion_car === 'áno'), K = b.filter((r) => r.lion_car !== 'áno');
+  const a = (x) => { const v = x.map((r) => numOrNull(r.dni_v_ponuke)).filter((y) => y != null); return v.length ? Math.round(v.reduce((p, y) => p + y, 0) / v.length) : null; };
+  return [{lion_ks: L.length, trh_ks: b.length, lion_dni: a(L), konk_dni: a(K)}];
+}});
+
+dash.calc('udalosti_sum', {inputs: ['udalosti'], fn: (udalosti) => {
+  if (!udalosti.length) return [];
+  const last = udalosti.map((e) => e.datum).sort().pop(); const d = udalosti.filter((e) => e.datum === last);
+  return ['Zmizlo z ponuky (predané)', 'Označené ako predané', 'Nové v ponuke', 'Rezervované', 'Zmena ceny'].map((udalost) => ({datum: last, udalost,
+    lion: d.filter((e) => e.udalost === udalost && (e.dealer || '').startsWith('LION')).length, konkurencia: d.filter((e) => e.udalost === udalost && !(e.dealer || '').startsWith('LION')).length}));
+}});
+
+dash.calc('poradie', {inputs: ['sklad'], fn: (sklad) => {
+  const rows = ponuka(sklad).filter((r) => r.cena !== '' && r.cena != null); const groups = {}; const out = [];
+  for (const r of rows) (groups[(r.typ === 'Nové' ? 'N' : 'J') + '|' + r.model + '|' + r.motorizacia] ||= []).push(r);
+  for (const g0 of Object.values(groups)) for (const r of g0) {
+    const c = +r.cena;
+    const g = r.typ === 'Nové' ? g0 : g0.filter((o) => { const y1 = numOrNull(r.rok), y2 = numOrNull(o.rok), k1 = numOrNull(r.km), k2 = numOrNull(o.km);
+      return (y1 == null || y2 == null || Math.abs(y1 - y2) <= 1) && (k1 == null || k2 == null || Math.abs(k1 - k2) <= 30000); });
+    const prices = g.map((o) => +o.cena).sort((a, b) => a - b); const h = prices.length >> 1, md = prices.length % 2 ? prices[h] : (prices[h - 1] + prices[h]) / 2;
+    out.push({url: r.url, dealer: r.dealer, lion: r.lion_car, typ: r.typ, model: r.model, motorizacia: r.motorizacia, palivo: r.palivo, rok: r.rok, km: numOrNull(r.km), cena: c,
+      cennikova_cena: numOrNull(r.cennikova_cena), zlava_pct: numOrNull(r.zlava_pct), poradie: prices.filter((p) => p < c).length + 1, pocet: prices.length,
+      vs_median_pct: prices.length > 1 ? Math.round(1000 * (c - md) / md) / 10 : null, stav: r.stav === 'rezervované' ? 'rezervované' : (r.dostupnost || ''),
+      median: prices.length > 1 ? Math.round(md) : null, nazov: r.nazov, dni_v_ponuke: numOrNull(r.dni_v_ponuke),
+      dni_znamy: r.dni_zdroj === 'portál BMW' || (r.prvy_krat_videne && r.prvy_krat_videne > '2026-11-19') ? 'áno' : 'nie'});
+  }
+  return out;
+}});
+
+dash.calc('predaje', {inputs: ['udalosti'], fn: (udalosti) => {
+  const sale = udalosti.filter((e) => e.udalost === 'Zmizlo z ponuky (predané)' || e.udalost === 'Označené ako predané')
+    .sort((a, b) => (a.datum < b.datum ? -1 : a.datum > b.datum ? 1 : ((a.zdroj || '').startsWith('Portál') ? -1 : 1)));
+  const byVin = new Map();
+  for (const e of sale) {
+    const key = e.vin || (e.dealer + '|' + e.nazov); const prev = byVin.get(key);
+    const cena = numOrNull(e.cena_pred) ?? numOrNull(e.cena_po); const lp = numOrNull(e.cennikova_cena);
+    const row = {vin: key, datum: e.datum, dealer: e.dealer, lion: (e.dealer || '').startsWith('LION') ? 'áno' : 'nie', typ: e.typ || 'Jazdené', model: e.model,
+      motorizacia: e.motorizacia || e.nazov, rok: e.rok || '', km: numOrNull(e.km), cena, cennikova_cena: lp,
+      zlava_pct: lp && cena && lp > cena ? Math.round(1000 * (lp - cena) / lp) / 10 : null, dni_v_ponuke: numOrNull(e.dni_v_ponuke)};
+    if (!prev) byVin.set(key, row);
+    else { for (const k of Object.keys(row)) if (prev[k] == null || prev[k] === '') prev[k] = row[k]; if (prev.typ === 'Jazdené' && row.typ && row.typ !== 'Jazdené') prev.typ = row.typ; }
+  }
+  return [...byVin.values()];
+}});
+
+dash.calc('pozicia_modely', {inputs: ['poradie'], fn: (poradie) => {
+  const out = [];
+  for (const typ of TYPY) {
+    const L = poradie.filter((r) => r.lion === 'áno' && r.pocet > 1 && (typ === 'Všetky' || r.typ === typ));
+    for (const model of [...new Set(L.map((r) => r.model))]) {
+      const g = L.filter((r) => r.model === model);
+      out.push({typ, model, lion_ks: g.length, odchylka_pct: Math.round(10 * g.reduce((s, r) => s + r.vs_median_pct, 0) / g.length) / 10,
+        drahsie_ks: g.filter((r) => r.vs_median_pct > 5).length, lacnejsie_ks: g.filter((r) => r.vs_median_pct < -5).length});
+    }
+  }
+  return out;
+}});
+
+// ---------- filtre a zoradenie ----------
+document.querySelectorAll('#f-typ').forEach((s) => { s.value = window.BT.typ; s.addEventListener('change', () => { window.BT.typ = s.value; window.BT.redraw(); }); });
+document.querySelectorAll('#f-obdobie').forEach((s) => s.addEventListener('change', () => { window.BT.obdobie = +s.value; window.BT.redraw(); }));
+window.BT.redraw = () => {
+  dash.drawAll();
+  document.querySelectorAll('#voz-prompt').forEach((el) => { el.hidden = !!window.BT.model; });
+};
+window.BT.sorted = (id, rows, def) => {
+  const s = window.BT.sort[id] || def;
+  return rows.slice().sort((a, b) => { const x = a[s.k], y = b[s.k]; if (x == null) return 1; if (y == null) return -1; return (typeof x === 'string' ? x.localeCompare(y, 'sk') : x - y) * s.d; });
+};
+document.querySelectorAll('.bt-table th[data-k]').forEach((th) => th.addEventListener('click', () => {
+  const t = th.closest('table'); const k = th.getAttribute('data-k'); const cur = window.BT.sort[t.id];
+  window.BT.sort[t.id] = {k, d: cur && cur.k === k ? -cur.d : (['model', 'nazov', 'motorizacia', 'dealer', 'typ', 'kluc'].includes(k) ? 1 : -1)};
+  const tb = t.querySelector('tbody'); if (tb) dash.draw(tb.getAttribute('data-draw'));
+}));
+</script>
+
+<script>
+// ---------- vykresľovanie ----------
+const f = (v, d) => window.BT.fmt(v, d);
+const cell = (tr, v, cls) => { const td = document.createElement('td'); td.textContent = v; if (cls) td.className = cls; tr.appendChild(td); return td; };
+const linkCell = (tr, url, text) => { const td = document.createElement('td'); td.className = 'l';
+  if (typeof url === 'string' && url.startsWith('https://')) { const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = text; td.appendChild(a); } else td.textContent = text;
+  tr.appendChild(td); };
+const tipMove = (made, el, ev, text, w) => { made.tip.hidden = false; made.tip.textContent = text; const b = el.getBoundingClientRect();
+  made.tip.style.left = Math.max(0, Math.min(ev.clientX - b.left + 12, (el.clientWidth || 600) - (w || 260))) + 'px'; made.tip.style.top = (ev.clientY - b.top - 34) + 'px'; };
+const tipMount = () => { const tip = document.createElement('div'); tip.className = 'bt-tip'; tip.hidden = true; return {tip}; };
+const medOf = (a) => { const b = a.filter((x) => x != null).sort((x, y) => x - y); if (!b.length) return null; const h = b.length >> 1; return b.length % 2 ? b[h] : (b[h - 1] + b[h]) / 2; };
+const avgOf = (a) => { const b = a.filter((x) => x != null); return b.length ? b.reduce((s, x) => s + x, 0) / b.length : null; };
+const kpiRow = () => { const k = dash.data('kpi'); const m = window.BT.model || 'Všetky modely'; return k.data.find((r) => r.typ === window.BT.typ && r.model === m) || null; };
+const hbarLabels = (svg, rows, top, rowH, label) => { const lab = svg.append('g').selectAll('text').data(rows).join('text').attr('x', 0).attr('y', (r, i) => top + i * rowH + rowH / 2 + 4).text(label);
+  let lw = 0; lab.each(function () { lw = Math.max(lw, this.getComputedTextLength()); }); return lw; };
+
+dash.draw('fmodel', (sel) => {
+  const models = [...new Set(dash.data('modely').data.filter((r) => r.typ === 'Všetky').map((r) => r.model))].sort((a, b) => a.localeCompare(b, 'sk', {numeric: true}));
+  sel.replaceChildren(new Option('Všetky modely', ''), ...models.map((m) => new Option(m, m)));
+  sel.value = window.BT.model || '';
+  sel.onchange = () => { window.BT.model = sel.value; window.BT.redraw(); };
+});
+
+dash.draw('k_lion', (el) => { const r = kpiRow(); el.textContent = r ? f(r.lion_ks) : '—'; });
+dash.draw('k_lion_n', (el) => { const r = kpiRow(); el.textContent = r ? `z toho ${f(r.lion_na_ceste)} na ceste, ${f(r.lion_rezerv)} rezervovaných` : '—'; });
+dash.draw('k_konk', (el) => { const r = kpiRow(); el.textContent = r ? f(r.konk_ks) : '—'; });
+dash.draw('k_podiel', (el) => { const r = kpiRow(); el.textContent = r && r.podiel_pct != null ? f(r.podiel_pct, 1) + ' %' : '—'; });
+dash.draw('k_zlava', (el) => { const r = kpiRow(); el.textContent = r && r.lion_zlava_pct != null ? f(r.lion_zlava_pct, 1) + ' %' : '–'; });
+dash.draw('k_zlava_n', (el) => { const r = kpiRow(); el.textContent = r ? (r.konk_zlava_pct != null ? `Lion Car · konkurencia ${f(r.konk_zlava_pct, 1)} %` : 'Lion Car · konkurencia bez údaja') : '—'; });
+
+dash.draw('lead', (el) => {
+  const r = kpiRow(); if (!r) { el.textContent = '—'; return; }
+  const typTxt = window.BT.typ === 'Všetky' ? 'vozidiel BMW' : ({'Nové': 'nových', 'Predvádzacie': 'predvádzacích', 'Manažérske': 'manažérskych', 'Jazdené': 'jazdených'}[window.BT.typ] + ' BMW');
+  let t = `Lion Car má dnes v ponuke ${f(r.lion_ks)} ${typTxt}${window.BT.model ? ` modelu ${window.BT.model}` : ''}, čo je ${f(r.podiel_pct, 1)} % ponuky všetkých 10 dealerov.`;
+  if (!window.BT.model) {
+    const rows = dash.data('modely').data.filter((x) => x.typ === window.BT.typ && x.lion_ks + x.konk_ks >= 10);
+    const best = rows.slice().sort((a, b) => b.podiel_pct - a.podiel_pct)[0];
+    const gap = rows.filter((x) => x.lion_ks === 0).sort((a, b) => b.konk_ks - a.konk_ks)[0];
+    if (best) t += ` Najsilnejší podiel má pri modeli ${best.model} (${f(best.podiel_pct, 1)} %).`;
+    if (gap) t += ` Model ${gap.model} konkurencia ponúka v ${f(gap.konk_ks)} kusoch, Lion Car v žiadnom.`;
+  }
+  el.textContent = t;
+});
+
+dash.draw('ch_dealeri', {mount: tipMount, update: (el, made) => {
+  const m = window.BT.model || 'Všetky modely';
+  const rows = dash.data('dealeri').data.filter((r) => r.typ === window.BT.typ && r.model === m).sort((a, b) => b.ks - a.ks);
+  el.replaceChildren(); el.appendChild(made.tip);
+  const W = el.clientWidth || 600, rowH = 30, H = rows.length * rowH + 10;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Počet vozidiel v ponuke podľa dealera');
+  const left = hbarLabels(svg, rows, 0, rowH, (r) => r.dealer) + 12;
+  const x = d3.scaleLinear().domain([0, d3.max(rows, (r) => r.ks) || 1]).range([0, Math.max(10, W - left - 40)]);
+  svg.append('g').selectAll('rect').data(rows).join('rect').attr('x', left).attr('y', (r, i) => i * rowH + 5).attr('height', rowH - 10).attr('width', (r) => x(r.ks)).attr('rx', 2)
+    .style('fill', (r) => (r.lion === 'áno' ? dash.colors[0] : 'var(--cds-chart-muted)'))
+    .on('pointermove', (ev, r) => tipMove(made, el, ev, `${r.dealer}: ${r.ks} vozidiel, ${r.rezervovane} rezervovaných`))
+    .on('pointerleave', () => { made.tip.hidden = true; });
+  svg.append('g').selectAll('text').data(rows).join('text').attr('x', (r) => left + x(r.ks) + 6).attr('y', (r, i) => i * rowH + rowH / 2 + 4).text((r) => r.ks);
+}});
+
+dash.draw('t_modely', (tb) => {
+  tb.replaceChildren();
+  let rows = dash.data('modely').data.filter((r) => r.typ === window.BT.typ);
+  if (window.BT.model) rows = rows.filter((r) => r.model === window.BT.model);
+  for (const r of window.BT.sorted('t-modely', rows, {k: 'konk_ks', d: -1})) {
+    const tr = document.createElement('tr'); tr.style.cursor = 'pointer'; if (r.lion_ks) tr.className = 'lion';
+    cell(tr, r.model); cell(tr, f(r.lion_ks)); cell(tr, f(r.konk_ks)); cell(tr, f(r.podiel_pct, 1)); cell(tr, f(r.lion_cena)); cell(tr, f(r.konk_cena));
+    cell(tr, r.lion_zlava_pct == null ? '–' : f(r.lion_zlava_pct, 1)); cell(tr, r.konk_zlava_pct == null ? '–' : f(r.konk_zlava_pct, 1));
+    tr.addEventListener('click', () => { window.BT.model = r.model; window.BT.redraw(); const s = document.getElementById('motorizacie'); if (s) s.scrollIntoView({behavior: 'smooth'}); });
+    tb.appendChild(tr);
+  }
+});
+
+dash.draw('h_motor', (el) => { el.textContent = window.BT.model ? `– ${window.BT.model}` : '– všetky modely (top 40)'; });
+dash.draw('t_motor', (tb) => {
+  tb.replaceChildren();
+  let rows = dash.data('motorizacie').data.filter((r) => r.typ === window.BT.typ);
+  if (window.BT.model) rows = rows.filter((r) => r.model === window.BT.model);
+  for (const r of window.BT.sorted('t-motor', rows, {k: 'konk_ks', d: -1}).slice(0, window.BT.model ? 200 : 40)) {
+    const tr = document.createElement('tr'); if (r.lion_ks) tr.className = 'lion';
+    cell(tr, r.motorizacia); cell(tr, r.palivo, 'l'); cell(tr, f(r.lion_ks)); cell(tr, f(r.konk_ks)); cell(tr, f(r.lion_cena)); cell(tr, f(r.konk_cena)); cell(tr, f(r.konk_min));
+    cell(tr, r.konk_zlava_pct == null ? '–' : f(r.konk_zlava_pct, 1));
+    tb.appendChild(tr);
+  }
+});
+
+// konkrétne vozidlá
+const vozRows = () => (window.BT.model ? dash.data('poradie').data.filter((r) => r.model === window.BT.model && (window.BT.typ === 'Všetky' || r.typ === window.BT.typ)) : null);
+dash.draw('h_voz', (el) => { el.textContent = window.BT.model ? `– ${window.BT.model}` : ''; });
+dash.draw('voz_sum', (el) => {
+  const rows = vozRows(); if (!rows) { el.textContent = ''; return; }
+  const L = rows.filter((r) => r.lion === 'áno'); const dealers = new Set(rows.filter((r) => r.lion !== 'áno').map((r) => r.dealer)).size;
+  if (!L.length) { el.textContent = `Lion Car tento model v ponuke nemá. Konkurencia ho ponúka v ${f(rows.length)} kusoch u ${f(dealers)} dealerov.`; return; }
+  const cmp = L.filter((r) => r.pocet > 1); const avgDev = cmp.length ? cmp.reduce((s, r) => s + r.vs_median_pct, 0) / cmp.length : null;
+  let t = `Lion Car má ${f(L.length)} z ${f(rows.length)} áut tohto modelu na trhu (konkurencia: ${f(dealers)} dealerov). `;
+  if (cmp.length) t += `Pri ${f(cmp.length)} autách s porovnateľnou ponukou ste v priemere o ${f(Math.abs(avgDev), 1)} % ${avgDev > 0 ? 'nad' : 'pod'} mediánom; najlacnejší ste v ${f(cmp.filter((r) => r.poradie === 1).length)} a najdrahší v ${f(cmp.filter((r) => r.poradie === r.pocet).length)} prípadoch.`;
+  else t += 'Pre vaše autá zatiaľ nie je na trhu rovnaká motorizácia v rovnakom type na porovnanie.';
+  el.textContent = t;
+});
+dash.draw('ch_voz', {mount: tipMount, update: (el, made) => {
+  const rows = vozRows(); el.replaceChildren();
+  if (!rows || !rows.length) { el.style.minHeight = '0px'; return; }
+  el.style.minHeight = '120px'; el.appendChild(made.tip);
+  const keyOf = (r) => (window.BT.typ === 'Všetky' ? r.typ + ' · ' : '') + r.motorizacia;
+  const byM = d3.group(rows, keyOf); const keys = [...byM.keys()].sort((a, b) => d3.median(byM.get(a), (r) => r.cena) - d3.median(byM.get(b), (r) => r.cena));
+  const W = el.clientWidth || 600, rowH = 28, top = 8, bottom = 28, H = keys.length * rowH + top + bottom;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', `Ceny áut modelu ${window.BT.model}`);
+  const left = Math.min(hbarLabels(svg, keys, top, rowH, (k) => k) + 14, W * 0.45);
+  const x = d3.scaleLinear().domain(d3.extent(rows, (r) => r.cena)).nice().range([left, W - 16]);
+  svg.append('g').attr('transform', `translate(0,${H - bottom + 6})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((W - left) / 90))).tickFormat((v) => f(v / 1000) + ' tis.')).selectAll('line,path').style('stroke', 'var(--cds-chart-axis)');
+  svg.append('g').selectAll('line').data(keys).join('line').attr('x1', left).attr('x2', W - 16).attr('y1', (k, i) => top + i * rowH + rowH / 2).attr('y2', (k, i) => top + i * rowH + rowH / 2).style('stroke', 'var(--cds-chart-grid)');
+  svg.append('g').selectAll('circle').data(rows.slice().sort((a, b) => (a.lion === 'áno') - (b.lion === 'áno'))).join('circle')
+    .attr('cx', (r) => x(r.cena)).attr('cy', (r) => top + keys.indexOf(keyOf(r)) * rowH + rowH / 2).attr('r', (r) => (r.lion === 'áno' ? 6 : 4.5))
+    .style('fill', (r) => (r.lion === 'áno' ? dash.colors[0] : 'var(--cds-chart-muted)')).style('fill-opacity', (r) => (r.lion === 'áno' ? 1 : 0.75))
+    .style('stroke', (r) => (r.lion === 'áno' ? 'var(--color-bg)' : 'none')).style('stroke-width', 1.5)
+    .on('pointermove', (ev, r) => tipMove(made, el, ev, `${r.dealer} · ${r.motorizacia} · ${r.rok || ''}${r.km ? ' · ' + f(r.km) + ' km' : ''} · ${f(r.cena)} € · poradie ${r.poradie}/${r.pocet}`, 320))
+    .on('pointerleave', () => { made.tip.hidden = true; });
+}});
+dash.draw('t_voz', (tb) => {
+  tb.replaceChildren(); const rows0 = vozRows(); if (!rows0) return;
+  const rows = window.BT.sort['t-voz'] ? window.BT.sorted('t-voz', rows0, {k: 'cena', d: 1}) : rows0.slice().sort((a, b) => a.typ.localeCompare(b.typ, 'sk') || a.motorizacia.localeCompare(b.motorizacia, 'sk') || a.cena - b.cena);
+  for (const r of rows) {
+    const tr = document.createElement('tr'); if (r.lion === 'áno') tr.className = 'lion';
+    linkCell(tr, r.url, r.dealer);
+    cell(tr, r.typ, 'l'); cell(tr, r.motorizacia, 'l'); cell(tr, r.rok || '–'); cell(tr, f(r.km)); cell(tr, f(r.cena)); cell(tr, f(r.cennikova_cena)); cell(tr, r.zlava_pct == null ? '–' : f(r.zlava_pct, 1));
+    cell(tr, `${r.poradie} / ${r.pocet}`, r.lion === 'áno' && r.pocet > 1 ? (r.poradie === 1 ? 'good' : (r.poradie === r.pocet ? 'bad' : '')) : '');
+    cell(tr, r.vs_median_pct == null ? '–' : (r.vs_median_pct > 0 ? '+' : '') + f(r.vs_median_pct, 1)); cell(tr, r.stav, 'l');
+    tb.appendChild(tr);
+  }
+});
+
+// jazdené (portál)
+const jk = () => dash.data('jazdene_kpi').data[0];
+dash.draw('j_lion', (el) => { el.textContent = jk() ? f(jk().lion_ks) : '—'; });
+dash.draw('j_trh', (el) => { el.textContent = jk() ? f(jk().trh_ks) : '—'; });
+dash.draw('j_dni', (el) => { el.textContent = jk() ? f(jk().lion_dni) : '—'; });
+dash.draw('j_dni_n', (el) => { el.textContent = jk() ? `Lion Car · konkurencia ${f(jk().konk_dni)} dní` : '—'; });
+dash.draw('t_pozicia', (tb) => {
+  tb.replaceChildren();
+  for (const r of window.BT.sorted('t-pozicia', dash.data('pozicia').data, {k: 'rozdiel_pct', d: -1})) {
+    const tr = document.createElement('tr');
+    cell(tr, r.nazov); cell(tr, r.rok); cell(tr, f(r.km)); cell(tr, f(r.cena)); cell(tr, f(r.porovnatelne)); cell(tr, f(r.trh_median));
+    cell(tr, r.rozdiel_pct == null ? '–' : (r.rozdiel_pct > 0 ? '+' : '') + f(r.rozdiel_pct, 1), r.rozdiel_pct == null ? '' : (r.rozdiel_pct > 5 ? 'bad' : (r.rozdiel_pct < -5 ? 'good' : '')));
+    cell(tr, f(r.trh_min)); cell(tr, f(r.dni_v_ponuke));
+    tb.appendChild(tr);
+  }
+});
+
+// predaje
+const prRows = () => {
+  const d = dash.data('predaje').data; if (!d.length) return [];
+  const last = d.map((r) => r.datum).sort().pop();
+  const od = new Date(Date.parse(last + 'T00:00:00Z') - ((window.BT.obdobie || 30) - 1) * 864e5).toISOString().slice(0, 10);
+  return d.filter((r) => r.datum >= od && (window.BT.typ === 'Všetky' || r.typ === window.BT.typ) && (!window.BT.model || r.model === window.BT.model));
+};
+dash.onData(() => {
+  const n = dash.data('predaje').data.length;
+  document.querySelectorAll('#predaje-empty, #dni-predaj-empty').forEach((el) => { el.hidden = n > 0; });
+  document.querySelectorAll('#ev-empty').forEach((el) => { el.hidden = dash.data('udalosti').data.length > 0; });
+});
+const prSum = (L) => (L.length ? `medián ceny ${f(medOf(L.map((x) => x.cena)))} €, priem. ${f(avgOf(L.map((x) => x.dni_v_ponuke)))} dní v ponuke` : 'v zvolenom období bez predaja');
+dash.draw('pr_lion', (el) => { el.textContent = f(prRows().filter((x) => x.lion === 'áno').length); });
+dash.draw('pr_konk', (el) => { el.textContent = f(prRows().filter((x) => x.lion !== 'áno').length); });
+dash.draw('pr_lion_n', (el) => { el.textContent = prSum(prRows().filter((x) => x.lion === 'áno')); });
+dash.draw('pr_konk_n', (el) => { el.textContent = prSum(prRows().filter((x) => x.lion !== 'áno')); });
+dash.draw('pr_podiel', (el) => { const r = prRows(); el.textContent = r.length ? f(100 * r.filter((x) => x.lion === 'áno').length / r.length, 1) + ' %' : '–'; });
+dash.draw('ch_predaje', {mount: tipMount, update: (el, made) => {
+  el.replaceChildren(); const rows = prRows();
+  if (!rows.length) { el.style.minHeight = '0px'; return; }
+  el.style.minHeight = '200px'; el.appendChild(made.tip);
+  const days = d3.rollups(rows, (v) => ({lion: v.filter((x) => x.lion === 'áno').length, konk: v.filter((x) => x.lion !== 'áno').length}), (r) => r.datum).sort((a, b) => (a[0] < b[0] ? -1 : 1));
+  const W = el.clientWidth || 600, H = 200, m = {t: 10, r: 10, b: 28, l: 34};
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Počet predaných áut po dňoch');
+  const x = d3.scaleBand().domain(days.map((d) => d[0])).range([m.l, W - m.r]).padding(0.2);
+  const y = d3.scaleLinear().domain([0, d3.max(days, (d) => d[1].lion + d[1].konk) || 1]).nice().range([H - m.b, m.t]);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(d3.format('d'))).selectAll('line,path').style('stroke', 'var(--cds-chart-axis)');
+  const step = Math.ceil(days.length / Math.max(1, Math.floor((W - m.l) / 60)));
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(days.map((d) => d[0]).filter((d, i) => i % step === 0)).tickFormat((s) => s.slice(8, 10) + '.' + s.slice(5, 7) + '.')).selectAll('line,path').style('stroke', 'var(--cds-chart-axis)');
+  const g = svg.append('g').selectAll('g').data(days).join('g');
+  g.append('rect').attr('x', (d) => x(d[0])).attr('width', x.bandwidth()).attr('y', (d) => y(d[1].konk)).attr('height', (d) => y(0) - y(d[1].konk)).style('fill', 'var(--cds-chart-muted)');
+  g.append('rect').attr('x', (d) => x(d[0])).attr('width', x.bandwidth()).attr('y', (d) => y(d[1].konk + d[1].lion)).attr('height', (d) => y(d[1].konk) - y(d[1].konk + d[1].lion)).style('fill', dash.colors[0]);
+  g.on('pointermove', (ev, d) => tipMove(made, el, ev, `${d[0]}: Lion Car ${d[1].lion}, konkurencia ${d[1].konk}`)).on('pointerleave', () => { made.tip.hidden = true; });
+}});
+const modelLabel = (r) => ((r.motorizacia || '').startsWith(r.model) ? r.motorizacia : `${r.model} · ${r.motorizacia}`);
+dash.draw('t_pr_modely', (tb) => {
+  tb.replaceChildren();
+  const agg = d3.rollups(prRows(), (v) => { const c = v.map((x) => x.cena).filter((x) => x != null);
+    return {kluc: modelLabel(v[0]), lion: v.filter((x) => x.lion === 'áno').length, konk: v.filter((x) => x.lion !== 'áno').length, median: medOf(c),
+      min: c.length ? Math.min(...c) : null, max: c.length ? Math.max(...c) : null, zlava: avgOf(v.map((x) => x.zlava_pct)), dni: avgOf(v.map((x) => x.dni_v_ponuke))};
+  }, (r) => r.model + '|' + r.motorizacia).map((d) => d[1]);
+  for (const r of window.BT.sorted('t-pr-modely', agg, {k: 'konk', d: -1})) {
+    const tr = document.createElement('tr'); if (r.lion) tr.className = 'lion';
+    cell(tr, r.kluc); cell(tr, f(r.lion)); cell(tr, f(r.konk)); cell(tr, f(r.median)); cell(tr, f(r.min)); cell(tr, f(r.max)); cell(tr, r.zlava == null ? '–' : f(r.zlava, 1)); cell(tr, f(r.dni));
+    tb.appendChild(tr);
+  }
+});
+dash.draw('t_predaje', (tb) => {
+  tb.replaceChildren(); const rows = prRows();
+  const sorted = window.BT.sort['t-predaje'] ? window.BT.sorted('t-predaje', rows, {k: 'datum', d: -1}) : rows.slice().sort((a, b) => (a.datum < b.datum ? 1 : a.datum > b.datum ? -1 : (a.dealer || '').localeCompare(b.dealer || '', 'sk')));
+  for (const r of sorted.slice(0, 500)) {
+    const tr = document.createElement('tr'); if (r.lion === 'áno') tr.className = 'lion';
+    cell(tr, r.datum); cell(tr, r.dealer, 'l'); cell(tr, r.typ, 'l'); cell(tr, modelLabel(r), 'l'); cell(tr, r.rok || '–'); cell(tr, f(r.km)); cell(tr, f(r.cena)); cell(tr, f(r.cennikova_cena));
+    cell(tr, r.zlava_pct == null ? '–' : f(r.zlava_pct, 1)); cell(tr, f(r.dni_v_ponuke));
+    tb.appendChild(tr);
+  }
+});
+
+// denník zmien
+dash.draw('ev_tiles', (el) => {
+  el.replaceChildren();
+  for (const r of dash.data('udalosti_sum').data) {
+    const c = document.createElement('div'); c.className = 'bt-card';
+    const h = document.createElement('h3'); h.textContent = `${r.udalost} (${r.datum})`;
+    const b = document.createElement('div'); b.className = 'bt-big'; b.textContent = f(r.lion);
+    const n = document.createElement('div'); n.className = 'bt-note'; n.textContent = `Lion Car · konkurencia ${f(r.konkurencia)}`;
+    c.append(h, b, n); el.appendChild(c);
+  }
+});
+dash.draw('t_udalosti', (tb) => {
+  tb.replaceChildren();
+  for (const r of dash.data('udalosti').data.slice(0, 300)) {
+    const tr = document.createElement('tr'); if ((r.dealer || '').startsWith('LION')) tr.className = 'lion';
+    cell(tr, r.datum); cell(tr, r.udalost, 'l'); cell(tr, r.dealer, 'l'); cell(tr, r.nazov, 'l'); cell(tr, r.typ, 'l'); cell(tr, f(r.cena_pred)); cell(tr, f(r.cena_po)); cell(tr, f(r.dni_v_ponuke));
+    tb.appendChild(tr);
+  }
+});
+
+// pozícia dnes
+dash.draw('ch_pozicia', {mount: tipMount, update: (el, made) => {
+  el.replaceChildren();
+  const rows = dash.data('pozicia_modely').data.filter((r) => r.typ === window.BT.typ).sort((a, b) => b.odchylka_pct - a.odchylka_pct);
+  if (!rows.length) { const p = document.createElement('p'); p.className = 'bt-empty'; p.textContent = 'Pre zvolený typ nemáte autá s porovnateľnou ponukou u konkurencie.'; el.appendChild(p); return; }
+  el.appendChild(made.tip);
+  const W = el.clientWidth || 600, rowH = 30, top = 6, bottom = 26, H = rows.length * rowH + top + bottom;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Odchýlka cien Lion Car od mediánu trhu podľa modelu');
+  const left = hbarLabels(svg, rows, top, rowH, (r) => `${r.model} (${r.lion_ks})`) + 14;
+  const ext = Math.max(10, d3.max(rows, (r) => Math.abs(r.odchylka_pct)));
+  const x = d3.scaleLinear().domain([-ext, ext]).nice().range([left, W - 50]);
+  svg.append('g').attr('transform', `translate(0,${H - bottom + 4})`).call(d3.axisBottom(x).ticks(5).tickFormat((v) => (v > 0 ? '+' : '') + v + ' %')).selectAll('line,path').style('stroke', 'var(--cds-chart-axis)');
+  svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', top).attr('y2', H - bottom).style('stroke', 'var(--cds-chart-reference)');
+  const col = (v) => (v > 5 ? 'var(--color-bad)' : v < -5 ? 'var(--color-ok)' : 'var(--color-warn)');
+  svg.append('g').selectAll('rect').data(rows).join('rect')
+    .attr('x', (r) => Math.min(x(0), x(r.odchylka_pct))).attr('width', (r) => Math.max(2, Math.abs(x(r.odchylka_pct) - x(0)))).attr('y', (r, i) => top + i * rowH + 6).attr('height', rowH - 12).attr('rx', 2)
+    .style('fill', (r) => col(r.odchylka_pct)).style('cursor', 'pointer')
+    .on('pointermove', (ev, r) => tipMove(made, el, ev, `${r.model}: ${r.lion_ks} vašich áut, priemerne ${(r.odchylka_pct > 0 ? '+' : '') + f(r.odchylka_pct, 1)} % voči mediánu; drahších o >5 %: ${r.drahsie_ks}, lacnejších o >5 %: ${r.lacnejsie_ks}`, 380))
+    .on('pointerleave', () => { made.tip.hidden = true; })
+    .on('click', (ev, r) => { window.BT.model = r.model; window.BT.redraw(); const s = document.getElementById('vozidla'); if (s) s.scrollIntoView({behavior: 'smooth'}); });
+  svg.append('g').selectAll('text').data(rows).join('text').attr('x', (r) => (r.odchylka_pct >= 0 ? x(r.odchylka_pct) + 5 : x(r.odchylka_pct) - 5)).attr('text-anchor', (r) => (r.odchylka_pct >= 0 ? 'start' : 'end'))
+    .attr('y', (r, i) => top + i * rowH + rowH / 2 + 4).text((r) => (r.odchylka_pct > 0 ? '+' : '') + f(r.odchylka_pct, 1) + ' %');
+}});
+dash.draw('t_precenit', (tb) => {
+  tb.replaceChildren();
+  const rows = dash.data('poradie').data.filter((r) => r.lion === 'áno' && (window.BT.typ === 'Všetky' || r.typ === window.BT.typ) && (!window.BT.model || r.model === window.BT.model))
+    .map((r) => { const dovod = [];
+      if (r.pocet > 1 && r.vs_median_pct > 5) dovod.push(`o ${f(r.vs_median_pct, 1)} % nad trhom`);
+      if (r.pocet > 1 && r.poradie === r.pocet) dovod.push('najdrahšie z porovnateľných');
+      if (r.dni_v_ponuke != null && r.dni_v_ponuke > 90 && r.dni_znamy === 'áno') dovod.push(`${f(r.dni_v_ponuke)} dní v ponuke`);
+      return {...r, rozdiel: r.median != null ? r.cena - r.median : null, dovod: dovod.join(', ')}; }).filter((r) => r.dovod);
+  for (const r of window.BT.sorted('t-precenit', rows, {k: 'rozdiel', d: -1})) {
+    const tr = document.createElement('tr');
+    linkCell(tr, r.url, r.motorizacia);
+    cell(tr, r.typ, 'l'); cell(tr, r.rok || '–'); cell(tr, f(r.km)); cell(tr, f(r.cena)); cell(tr, f(r.median));
+    cell(tr, r.rozdiel == null ? '–' : (r.rozdiel > 0 ? '+' : '') + f(r.rozdiel), r.rozdiel > 0 ? 'bad' : '');
+    cell(tr, r.vs_median_pct == null ? '–' : (r.vs_median_pct > 0 ? '+' : '') + f(r.vs_median_pct, 1)); cell(tr, `${r.poradie} / ${r.pocet}`);
+    cell(tr, r.dni_znamy === 'áno' ? f(r.dni_v_ponuke) : '–'); cell(tr, r.dovod, 'l');
+    tb.appendChild(tr);
+  }
+});
+const BUCKETS = [['0–30', 0, 30], ['31–60', 31, 60], ['61–90', 61, 90], ['91–180', 91, 180], ['nad 180', 181, 1e9]];
+const dniRows = () => dash.data('poradie').data.filter((r) => (window.BT.typ === 'Všetky' || r.typ === window.BT.typ) && (!window.BT.model || r.model === window.BT.model));
+dash.draw('ch_dni', {mount: tipMount, update: (el, made) => {
+  el.replaceChildren(); el.appendChild(made.tip);
+  const keys = [...BUCKETS.map((b) => b[0]), 'pred 19. 11.'];
+  const data = d3.rollups(dniRows(), (v) => { const o = {}; for (const k of keys) o[k] = 0;
+    for (const r of v) { if (r.dni_znamy !== 'áno') o['pred 19. 11.']++; else { const b = BUCKETS.find((q) => r.dni_v_ponuke >= q[1] && r.dni_v_ponuke <= q[2]); o[b ? b[0] : '0–30']++; } }
+    o.total = v.length; return o; }, (r) => r.dealer).sort((a, b) => b[1].total - a[1].total);
+  const colors = ['var(--color-ok)', dash.colors[0], dash.colors[3], 'var(--color-warn)', 'var(--color-bad)', 'var(--cds-chart-muted)'];
+  const W = el.clientWidth || 600, rowH = 28, top = 30, bottom = 6, H = data.length * rowH + top + bottom;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Autá v ponuke podľa dní v ponuke a dealera');
+  let lx = 0; keys.forEach((k, i) => { const g = svg.append('g').attr('transform', `translate(${lx},8)`); g.append('rect').attr('width', 10).attr('height', 10).style('fill', colors[i]);
+    const t = g.append('text').attr('x', 14).attr('y', 9).text(k + (i < 5 ? ' dní' : '')); lx += 28 + t.node().getComputedTextLength(); });
+  const left = hbarLabels(svg, data, top, rowH, (d) => d[0]) + 12;
+  const x = d3.scaleLinear().domain([0, d3.max(data, (d) => d[1].total) || 1]).range([left, W - 40]);
+  data.forEach((d, i) => { let acc = 0;
+    keys.forEach((k, j) => { const v = d[1][k]; if (!v) return;
+      svg.append('rect').attr('x', x(acc)).attr('width', Math.max(1, x(acc + v) - x(acc))).attr('y', top + i * rowH + 5).attr('height', rowH - 10).style('fill', colors[j])
+        .style('stroke', d[0] === 'LION CAR' ? 'var(--color-fg)' : 'none')
+        .on('pointermove', (ev) => tipMove(made, el, ev, `${d[0]} · ${k}${j < 5 ? ' dní' : ''}: ${v} áut z ${d[1].total}`)).on('pointerleave', () => { made.tip.hidden = true; });
+      acc += v; });
+    svg.append('text').attr('x', x(d[1].total) + 5).attr('y', top + i * rowH + rowH / 2 + 4).text(d[1].total); });
+}});
+dash.draw('t_dni', (tb) => {
+  tb.replaceChildren();
+  const agg = d3.rollups(dniRows(), (v) => { const k = v.filter((r) => r.dni_znamy === 'áno').map((r) => r.dni_v_ponuke);
+    return {dealer: v[0].dealer, ks: v.length, znamy: k.length, median: medOf(k), priemer: avgOf(k), nad90: k.filter((x) => x > 90).length, nad180: k.filter((x) => x > 180).length}; }, (r) => r.dealer).map((d) => d[1]);
+  for (const r of window.BT.sorted('t-dni', agg, {k: 'ks', d: -1})) {
+    const tr = document.createElement('tr'); if (r.dealer === 'LION CAR') tr.className = 'lion';
+    cell(tr, r.dealer); cell(tr, f(r.ks)); cell(tr, f(r.znamy)); cell(tr, f(r.median)); cell(tr, f(r.priemer)); cell(tr, f(r.nad90)); cell(tr, f(r.nad180));
+    tb.appendChild(tr);
+  }
+});
+dash.draw('t_dni_predaj', (tb) => {
+  tb.replaceChildren(); const rows = prRows(); if (!rows.length) return;
+  const agg = d3.rollups(rows, (v) => { const k = v.map((r) => r.dni_v_ponuke).filter((x) => x != null);
+    return {dealer: v[0].dealer, ks: v.length, median: medOf(k), priemer: avgOf(k), min: k.length ? Math.min(...k) : null, max: k.length ? Math.max(...k) : null, cena: medOf(v.map((r) => r.cena))}; }, (r) => r.dealer).map((d) => d[1]);
+  for (const r of window.BT.sorted('t-dni-predaj', agg, {k: 'ks', d: -1})) {
+    const tr = document.createElement('tr'); if ((r.dealer || '').startsWith('LION')) tr.className = 'lion';
+    cell(tr, r.dealer); cell(tr, f(r.ks)); cell(tr, f(r.median)); cell(tr, f(r.priemer)); cell(tr, f(r.min)); cell(tr, f(r.max)); cell(tr, f(r.cena));
+    tb.appendChild(tr);
+  }
+});
+</script>
