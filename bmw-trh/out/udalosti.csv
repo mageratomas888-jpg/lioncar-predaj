@@ -1,1 +1,1 @@
-datum,zdroj,udalost,dealer,model,nazov,typ,vin,cena_pred,cena_po,dni_v_ponuke
+datum,zdroj,udalost,dealer,model,motorizacia,palivo,nazov,typ,rok,km,vin,cennikova_cena,cena_pred,cena_po,dni_v_ponuke

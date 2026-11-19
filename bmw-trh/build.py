@@ -29,8 +29,31 @@ def model_family(title, series=""):
 def version(title):
     t = re.sub(r"^(BMW|MINI)\s+", "", title or "").strip()
     t = re.sub(r"\b(Rad|rad)\s+\d\s*", "", t)
+    t = re.sub(r"\b(xDrive|sDrive)\s+(\d)", r"\1\2", t)
+    t = re.sub(r"\b(\d{2}[a-z]{1,2})\s+(xDrive|sDrive)\b", r"\2\1", t)
+    t = re.sub(r"\s+mHEV\b", "", t)
     t = re.sub(r"\s+(A/T|AT|Sedan|Touring|Gran Coup[eé]|Coup[eé]|Cabrio|Active Tourer|Gran Tourer|Sports Activity.*|M Sport.*|Luxury Line.*|xLine.*|Sport Line.*)$", "", t)
     return t.strip()
+
+def engine(title, model, kw):
+    """Jednotná motorizácia: model + kód motora + pohon + výkon (napr. 'X5 40d xDrive · 230 kW')."""
+    t = re.sub(r"^(BMW|MINI)\s+", "", title or "")
+    t = re.split(r"\s_|_|\[|\s-\s|mimoriadne|Predvádzacie|Vozidlo", t)[0]
+    tok = None
+    for rx in (r"\b(M\d{2,3}[a-z]{0,2})\b", r"(?:xDrive|sDrive|eDrive)\s?(\d{2}[a-z]{0,2})\b",
+               r"\b([1-8]\d{2}[a-z]{0,2})\b", r"\b(\d{2}[a-z]{0,2})\s+(?:xDrive|sDrive|eDrive)\b", r"\b(\d{2}[a-z]{1,2})\b"):
+        m = re.search(rx, t, re.I)
+        if m:
+            tok = m.group(1)
+            tok = ("M" + tok[1:].lower()) if tok[0] in "Mm" else tok.lower()
+            break
+    if re.search(r"\bM\s+Competition|\bCompetition\b", t) and not tok: tok = "M Competition"
+    drive = "xDrive" if "xdrive" in t.lower() else ("sDrive" if "sdrive" in t.lower() else ("eDrive" if "edrive" in t.lower() else ""))
+    if not tok:
+        tok = re.sub(r"\s*\b(xDrive|sDrive|eDrive)\b", "", version(t), flags=re.I).strip()
+        if model and tok.lower().startswith(model.lower()): tok = tok[len(model):].strip()
+    name = " ".join(x for x in [model if model and not model.startswith("Rad") else "", tok, drive] if x)
+    return f"{name} · {kw} kW" if kw else name
 
 def fuel_norm(f):
     f = (f or "").lower()
@@ -60,7 +83,7 @@ for c in used:
         "znacka": c["brand"], "model": model_family(c["title"], c["series"]) if c["brand"] == "BMW" else c["brand"],
         "verzia": version(c["title"]), "nazov": c["title"], "karoseria": c["body"], "kod_rady": c["seriesCode"],
         "palivo": fuel_norm(c["fuel"]), "kw": c["kw"], "k": c["hp"],
-        "motorizacia": f"{version(c['title'])} · {c['kw']} kW",
+        "motorizacia": engine(c["title"], model_family(c["title"], c["series"]), c["kw"]),
         "rok": c["year"], "registracia": c["registration"], "km": c["km"],
         "cena": c["price"], "cena_novy": c["newPrice"] or "",
         "pokles_z_novej_pct": round(100 * (1 - c["price"] / c["newPrice"]), 1) if c.get("newPrice") and c.get("price") else "",
@@ -87,8 +110,9 @@ for c in stock:
         "stav": "predané" if c["sold"] else ("rezervované" if c["reserved"] else "v ponuke"),
         "znacka": c["brand"], "model": model_family(c["title"]) if c["brand"] == "BMW" else c["brand"],
         "verzia": version(c["title"]), "nazov": c["title"], "palivo": fuel_norm(c["fuel"]), "kw": c["kw"] or "",
-        "motorizacia": f"{version(c['title'])} · {c['kw']} kW" if c["kw"] else version(c["title"]),
-        "rok": c["registration"], "km": c["km"] if c["km"] is not None else "",
+        "motorizacia": engine(c["title"], model_family(c["title"]), c["kw"]),
+        "rok": (re.search(r"(19|20)\d\d", c["registration"] or "") or [""])[0] if c["kind"] != "Nové" else "",
+        "km": c["km"] if c["km"] is not None else "",
         "cena": pr or "", "cena_bez_dph": c.get("priceNoVat") or "", "cennikova_cena": lp or "",
         "zlava": c.get("discount") or (lp - pr if lp and pr and lp > pr else ""),
         "zlava_pct": round(100 * (lp - pr) / lp, 1) if lp and pr and lp > pr else "",
@@ -115,11 +139,15 @@ def diff(src, rows, key_state):
         res_flag = r.get("rezervovane") == "áno" or r.get("stav") == "rezervované"
         cur[k] = {"first_seen": p["first_seen"] if p else (r.get("v_ponuke_od") or day), "cena": r["cena"],
                   "sold": sold_flag, "reserved": res_flag, "nazov": r["nazov"], "model": r["model"],
-                  "dealer": r["dealer"], "vin": r["vin"], "typ": r.get("typ", "Jazdené")}
+                  "dealer": r["dealer"], "vin": r["vin"], "typ": r.get("typ", "Jazdené"),
+                  "motorizacia": r.get("motorizacia", ""), "palivo": r.get("palivo", ""), "rok": r.get("rok", ""),
+                  "km": r.get("km", ""), "cennikova": r.get("cennikova_cena") or r.get("cena_novy") or ""}
         if first_run:
             continue
         base = {"datum": day, "zdroj": src, "dealer": r["dealer"], "vin": r["vin"], "nazov": r["nazov"],
                 "model": r["model"], "typ": r.get("typ", "Jazdené"), "cena_pred": "", "cena_po": r["cena"],
+                "motorizacia": cur[k]["motorizacia"], "palivo": cur[k]["palivo"], "rok": cur[k]["rok"], "km": cur[k]["km"],
+                "cennikova_cena": cur[k]["cennikova"],
                 "dni_v_ponuke": days(cur[k]["first_seen"], day)}
         if not p:
             events.append({**base, "udalost": "Nové v ponuke"})
@@ -135,6 +163,8 @@ def diff(src, rows, key_state):
             if k not in cur:
                 events.append({"datum": day, "zdroj": src, "dealer": p["dealer"], "vin": p["vin"], "nazov": p["nazov"],
                                "model": p["model"], "typ": p.get("typ", ""), "cena_pred": p["cena"], "cena_po": "",
+                               "motorizacia": p.get("motorizacia", ""), "palivo": p.get("palivo", ""), "rok": p.get("rok", ""),
+                               "km": p.get("km", ""), "cennikova_cena": p.get("cennikova", ""),
                                "dni_v_ponuke": days(p["first_seen"], day),
                                "udalost": "Zmizlo z ponuky (predané)" if not p.get("sold") else "Odstránené (už predané)"})
     state[key_state] = cur
@@ -154,7 +184,8 @@ def write(name, rows, fields=None):
 
 write("jazdene_trh.csv", used_rows)
 write("sklad_dealerov.csv", stock_rows)
-EV_FIELDS = ["datum", "zdroj", "udalost", "dealer", "model", "nazov", "typ", "vin", "cena_pred", "cena_po", "dni_v_ponuke"]
+EV_FIELDS = ["datum", "zdroj", "udalost", "dealer", "model", "motorizacia", "palivo", "nazov", "typ", "rok", "km", "vin",
+             "cennikova_cena", "cena_pred", "cena_po", "dni_v_ponuke"]
 events.sort(key=lambda e: (e["datum"], e["zdroj"], e["dealer"]), reverse=True)
 write("udalosti.csv", events, EV_FIELDS)
 STATE.write_text(json.dumps(state, ensure_ascii=False))
