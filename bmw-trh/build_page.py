@@ -117,6 +117,7 @@ input:focus-visible, button:focus-visible { outline: 2px solid var(--accent); ou
   </form>
 </div>
 <script>
+(() => {
 const P = { s: "%SALT%", iv: "%IV%", ct: "%CT%", it: %ITER% };
 const KEY = 'bmw-trh-heslo';
 const u8 = (b) => Uint8Array.from(atob(b), (c) => c.charCodeAt(0));
@@ -141,6 +142,7 @@ f.addEventListener('submit', async (e) => {
   }
 });
 (async () => { let s = null; try { s = localStorage.getItem(KEY); } catch (x) {} if (s) { try { await open(s); } catch (x) { try { localStorage.removeItem(KEY); } catch (y) {} } } })();
+})();
 </script>
 </body>
 </html>
