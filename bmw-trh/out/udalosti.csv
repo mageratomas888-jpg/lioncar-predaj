@@ -1,1 +1,70 @@
 datum,zdroj,udalost,dealer,model,motorizacia,palivo,nazov,typ,rok,km,vin,cennikova_cena,cena_pred,cena_po,dni_v_ponuke
+2026-11-20,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,X3,X3 30e xDrive · 220 kW,Hybrid,BMW X3 30e xDrive,Nové,,0,WBA65GP070N406920,88523,,77938,1
+2026-11-20,Weby dealerov,Nové v ponuke,RIJA - Bavaria,Rad 1,123 xDrive · 160 kW,Benzín,BMW 123 xDrive,Nové,,0,V20731,60905,,43300,0
+2026-11-20,Weby dealerov,Nové v ponuke,RIJA - Bavaria,i5,i5 40 xDrive · 290 kW,Elektro,BMW i5 xDrive40 Touring,Nové,,0,V20732,104583,,72600,0
+2026-11-20,Weby dealerov,Nové v ponuke,RIJA - Bavaria,X6,X6 30d xDrive · 210 kW,Diesel,BMW X6 xDrive30d,Nové,,0,V20733,120107,,87900,0
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X1,X1 20d xDrive · 120 kW,Diesel,BMW X1 xDrive20d,Nové,,0,0992647,61541,53531,51031,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X1,X1 20d xDrive · 120 kW,Diesel,BMW X1 xDrive20d,Nové,,0,WBA41EG0705862505,61680,53870,51370,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X1,X1 25e xDrive · 180 kW,Hybrid,BMW X1 xDrive25e,Nové,,0,WBA21EF0805653444,61966,54500,53500,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X1,X1 20d xDrive · 120 kW,Diesel,BMW X1 xDrive20d,Nové,,0,WBA41EG0105871698,,53531,53530,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X1,X1 20d xDrive · 120 kW,Diesel,BMW X1 xDrive20d,Nové,,0,WBA41EG0805686287,68746,61500,58990,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Nové,,0,0992649,74393,66480,61383,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Nové,,0,WBA15GR030N462358,76534,66000,63500,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Nové,,0,0991968,81248,69888,67238,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Nové,,0,WBA11GR0609455991,80035,69650,68650,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Nové,,0,WBA15GR050N456142,81571,71000,68750,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X3,X3 30e xDrive · 220 kW,Hybrid,BMW X3 30e xDrive,Nové,,0,0992650,83275,71765,69265,1
+2026-11-20,Weby dealerov,Zmena ceny,LION CAR,X3,X3 40d xDrive · 223 kW,Diesel,BMW X3 40d xDrive,Nové,,0,WBA25GR000N431976,91459,77500,76500,1
+2026-11-20,Weby dealerov,Nové v ponuke,LION CAR,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2021,132770,WBAJU810109J34241,,,42990,1
+2026-11-20,Weby dealerov,Nové v ponuke,LION CAR,XM,XM 50e xDrive · 230 kW,Hybrid,BMW XM 50e xDrive,Jazdené,2024,51278,WBS11CS0509W65626,,,97990,1
+2026-11-20,Weby dealerov,Rezervované,LION CAR,i3,i3 50 xDrive · 345 kW,Elektro,BMW i3 50 xDrive Sedan,Predvádzacie,,0,9651440,80813,,79000,1
+2026-11-20,Weby dealerov,Zmizlo z ponuky (predané),Bavaria BA + TT,Rad 5,550e xDrive · 360 kW,Hybrid,BMW 550e xDrive Sedan_vozidlo predané,Nové,,0,WBA11FK090CX62417,,89900,,1
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 2,218i · 103 kW,Benzín,BMW 218i Gran Coupé,Jazdené,2024,43100,WBA11AK0907R58434,55990,28499,27999,60
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 2,218i · 103 kW,Benzín,BMW 218i Gran Coupé,Jazdené,2024,19400,WBA11AK0207R41555,52760,30999,29999,17
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive Touring,Jazdené,2025,63700,WBA31FZ020FU37900,,37499,36999,31
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive,Jazdené,2026,25900,WBA48FU0508G00036,71369,42999,42499,48
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive Touring,Jazdené,2026,27400,WBA48FU0208G02536,72330,42999,42499,43
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive Touring,Jazdené,2026,26000,WBA31FZ050FW03570,72859,43999,43499,43
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 3,330i xDrive · 190 kW,Benzín,BMW 330i xDrive Touring,Jazdené,2026,25100,WBA71FY0X0FW06760,75759,45499,44999,48
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 4,420d xDrive · 140 kW,Diesel,BMW 420d xDrive Gran Coupé,Jazdené,2025,31700,WBA51FR090FU90960,76730,44499,43999,87
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 4,420d xDrive · 140 kW,Diesel,BMW 420d xDrive Gran Coupé,Jazdené,2025,20300,WBA51FR000FV94608,83220,46499,45999,64
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 4,420d xDrive · 140 kW,Diesel,BMW 420d xDrive Gran Coupé,Jazdené,2025,46700,WBA51FR010FU48489,87170,47499,46999,37
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 6,630d xDrive · 195 kW,Diesel,BMW 630d xDrive Gran Turismo,Jazdené,2020,152700,WBAJW81060CE29156,,29999,28999,9
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X1,X1 23d xDrive · 145 kW,Diesel,BMW X1 xDrive23d,Jazdené,2025,24800,WBA51EG0705491236,67519,43999,43499,48
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X1,X1 23i xDrive · 150 kW,Benzín,BMW X1 xDrive23i,Jazdené,2025,15600,WBA61EE0305491712,66139,44999,44499,25
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X1,X1 23d xDrive · 145 kW,Diesel,BMW X1 xDrive23d,Jazdené,2025,24700,WBA51EG0505493955,66629,44999,44499,24
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X1,X1 23d xDrive · 145 kW,Diesel,BMW X1 xDrive23d,Jazdené,2025,27900,WBA51EG0505529577,67519,44999,44499,24
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X2,X2 20d xDrive · 110 kW,Diesel,BMW X2 xDrive20d,Jazdené,2025,29200,WBA51GN0305325956,66650,41499,40999,53
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X2,X2 20d xDrive · 110 kW,Diesel,BMW X2 xDrive20d,Jazdené,2025,17600,WBA51GN0105305592,66810,43999,43499,48
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X3,X3 20d xDrive · 140 kW,Diesel,BMW X3 xDrive20d,Jazdené,2020,104000,WBA35BG020N055386,,27999,27499,18
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X5,X5 25d xDrive · 170 kW,Diesel,BMW X5 xDrive25d,Jazdené,2016,150700,WBALS010X00T86252,,17999,17499,24
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2024,111600,WBA11EV0109V82450,,56999,55999,17
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2024,42500,WBA11EV0509V88090,,57999,56999,9
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X6,X6 M60i xDrive · 399 kW,Benzín,BMW X6 M60i xDrive,Predvádzacie,2025,15000,WBA41EX0209Z01655,151439,92499,91999,189
+2026-11-20,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Volkswagen,Volkswagen T-ROC · 81 kW,Benzín,Volkswagen T-ROC,Jazdené,2023,50200,WVGZZZA1ZPV575367,,16499,15999,1
+2026-11-20,Weby dealerov,Zmizlo z ponuky (predané),Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive Sedan,Nové,,0,WBA48FU0008G02163,72166,66990,,1
+2026-11-20,Weby dealerov,Zmizlo z ponuky (predané),Auto Palace Bratislava,iX3,iX3 40 · 235 kW,Elektro,BMW iX3 40,Nové,,0,WBA11HR030DA69065,79502,,,1
+2026-11-20,Portál BMW (jazdené),Nové v ponuke,LION CAR,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2021,132770,WBAJU810109J34241,94096,,42990,1
+2026-11-20,Portál BMW (jazdené),Nové v ponuke,LION CAR,XM,XM 50e xDrive · 230 kW,Hybrid,BMW XM 50e xDrive,Jazdené,2024,51278,WBS11CS0509W65626,140524,,97990,1
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 6,630d xDrive · 195 kW,Diesel,BMW 630d xDrive,Jazdené,2020,152700,WBAJW81060CE29156,,29999,28999,9
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2024,42500,WBA11EV0509V88090,89614,57999,56999,9
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 2,218i · 100 kW,Benzín,BMW 218i,Jazdené,2024,16400,WBA11AK0207R41555,,30999,29999,17
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2024,111600,WBA11EV0109V82450,110671,56999,55999,17
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X3,X3 20d xDrive · 140 kW,Diesel,BMW X3 xDrive20d,Jazdené,2020,104000,WBA35BG020N055386,70258,27999,27499,18
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X5,X5 25d xDrive · 170 kW,Diesel,BMW X5 xDrive25d,Jazdené,2016,150700,WBALS010X00T86252,72833,17999,17499,24
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X1,X1 23d xDrive · 145 kW,Diesel,BMW X1 xDrive23d,Jazdené,2025,27900,WBA51EG0505529577,67385,44999,44499,24
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X1,X1 23d xDrive · 145 kW,Diesel,BMW X1 xDrive23d,Jazdené,2025,24700,WBA51EG0505493955,66336,44999,44499,24
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X1,X1 23i xDrive · 150 kW,Benzín,BMW X1 xDrive23i,Jazdené,2025,15600,WBA61EE0305491712,66139,44999,44499,25
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive,Jazdené,2024,63700,WBA31FZ020FU37900,,37499,36999,31
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 4,420d xDrive · 140 kW,Diesel,BMW 420d xDrive,Jazdené,2025,46700,WBA51FR010FU48489,87170,47499,46999,37
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive Touring,Jazdené,2025,26000,WBA31FZ050FW03570,72420,43999,43499,43
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive Sedan,Jazdené,2025,27400,WBA48FU0208G02536,71992,42999,42499,43
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X2,X2 20d xDrive · 110 kW,Diesel,BMW X2 xDrive20d,Jazdené,2025,17600,WBA51GN0105305592,66810,43999,43499,48
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive Sedan,Jazdené,2026,25900,WBA48FU0508G00036,70869,42999,42499,48
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X1,X1 23d xDrive · 145 kW,Diesel,BMW X1 xDrive23d,Jazdené,2025,24800,WBA51EG0705491236,67385,43999,43499,48
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 3,330i xDrive · 180 kW,Benzín,BMW 330i xDrive Touring,Jazdené,2026,25100,WBA71FY0X0FW06760,73920,45499,44999,48
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X2,X2 20d xDrive · 110 kW,Diesel,BMW X2 xDrive20d,Jazdené,2025,29200,WBA51GN0305325956,66650,41499,40999,53
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 2,218i · 100 kW,Benzín,BMW 218i,Jazdené,2024,43100,WBA11AK0907R58434,55990,28499,27999,60
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 4,420d xDrive · 140 kW,Diesel,BMW 420d xDrive,Jazdené,2025,20300,WBA51FR000FV94608,83220,46499,45999,64
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,Rad 4,420d xDrive · 140 kW,Diesel,BMW 420d xDrive,Jazdené,2025,31700,WBA51FR090FU90960,76730,44499,43999,87
+2026-11-20,Portál BMW (jazdené),Zmena ceny,Auto Palace Bratislava,X6,X6 M60i xDrive · 390 kW,Benzín,BMW X6 M60i xDrive,Jazdené,2024,10000,WBA41EX0209Z01655,149027,92499,91999,189
