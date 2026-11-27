@@ -1,4 +1,24 @@
 datum,zdroj,udalost,dealer,model,motorizacia,palivo,nazov,typ,rok,km,vin,cennikova_cena,cena_pred,cena_po,dni_v_ponuke
+2026-11-27,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,Rad 5,540d xDrive · 223 kW,Diesel,BMW 540d xDrive Sedan,Nové,,0,47597,103448,,79740,8
+2026-11-27,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,X1,X1 20i sDrive · 125 kW,Benzín,BMW X1 sDrive20i,Nové,,0,47589,65931,,48885,8
+2026-11-27,Weby dealerov,Označené ako predané,T.O.B. + MD-Bavaria,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Manažérske,2025,9509,WBA15GR090N366640,72404,,54500,65
+2026-11-27,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Jazdené,,4025,WBA15GR0X0N394947,79746,,59990,39
+2026-11-27,Weby dealerov,Zmizlo z ponuky (predané),T.O.B. + MD-Bavaria,Rad 3,330e xDrive · 215 kW,Hybrid,BMW 330e xDrive Sedan,Predvádzacie,2024,17498,WBA51GK090FT54909,84715,44990,,226
+2026-11-27,Weby dealerov,Rezervované,RIJA - Bavaria,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2026,20600,WBA11EV0609342424,121998,,79900,8
+2026-11-27,Weby dealerov,Nové v ponuke,LION CAR,X5,X5 40 xDrive · 294 kW,Benzín,BMW X5 40 xDrive,Nové,,0,WBA61JF0309606776,128859,,,0
+2026-11-27,Weby dealerov,Zmena ceny,LION CAR,i3,i3 50 xDrive · 345 kW,Elektro,BMW i3 50 xDrive Sedan,Nové,,0,WBA51JB020FX32632,80813,79000,76813,2
+2026-11-27,Weby dealerov,Zmizlo z ponuky (predané),LION CAR,Rad 3,320d xDrive · 140 kW,Diesel,BMW 320d xDrive Sedan,Nové,,0,WBA48FU0008G44641,,78838,,8
+2026-11-27,Weby dealerov,Zmizlo z ponuky (predané),LION CAR,X5,X5 40 xDrive · 230 kW,Benzín,BMW X5 40 xDrive,Nové,,0,WBA81HV0409579686,123602,,,8
+2026-11-27,Weby dealerov,Zmizlo z ponuky (predané),LION CAR,Rad 7,740d xDrive · 230 kW,Diesel,BMW 740d xDrive Sedan,Nové,,0,WBA21HZ050CZ50387,,163215,,2
+2026-11-27,Weby dealerov,Zmizlo z ponuky (predané),LION CAR,Rad 7,M760e xDrive · 450 kW,Benzín,BMW M760e xDrive Sedan,Nové,,0,WBA81HZ070CZ50451,,181048,,2
+2026-11-27,Weby dealerov,Zmizlo z ponuky (predané),Bavaria BA + TT,X5,X5 M Competition · 460 kW,Benzín,BMW X5 M Competition,Nové,,0,WBS11ET0709266517,170726,129900,,8
+2026-11-27,Weby dealerov,Zmena ceny,Auto Palace Bratislava,Rad 7,740d xDrive · 220 kW,Diesel,BMW 740d xDrive Sedan,Nové,,0,WBA21EJ040CX69534,179779,125990,116990,8
+2026-11-27,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X6,X6 40d xDrive · 259 kW,Diesel,BMW X6 xDrive40d,Nové,,0,WBA21EY0709307603,136973,129990,122990,8
+2026-11-27,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X6,X6 40d xDrive · 259 kW,Diesel,BMW X6 xDrive40d,Nové,,0,WBA21EY0709389672,139398,131990,124990,8
+2026-11-27,Weby dealerov,Zmena ceny,Auto Palace Bratislava,X6,X6 40d xDrive · 259 kW,Diesel,BMW X6 xDrive40d,Nové,,0,WBA21EY0509394837,140669,133990,125990,8
+2026-11-27,Weby dealerov,Zmizlo z ponuky (predané),Auto Palace Bratislava,Rad 5,520d xDrive · 145 kW,Diesel,BMW 520d xDrive Sedan,Nové,,0,WBA21FL090CW89908,89750,80990,,8
+2026-11-27,Portál BMW (jazdené),Zmizlo z ponuky (predané),T.O.B.,Rad 3,330e xDrive · 215 kW,Hybrid,BMW 330e xDrive Sedan,Jazdené,2024,17498,WBA51GK090FT54909,84715,44990,,226
+2026-11-27,Portál BMW (jazdené),Nové v ponuke,Auto Palace Bratislava,X2,X2 20d xDrive · 110 kW,Diesel,BMW X2 xDrive20d,Jazdené,2025,20400,WBA51GN0105267510,65080,,39999,1
 2026-11-26,Weby dealerov,Nové v ponuke,T.O.B. + MD-Bavaria,Rad 5,520d xDrive · 145 kW,Diesel,BMW 520d xDrive Sedan,Jazdené,2026,27087,WBA21FL0X0CY22899,90510,,54990,1
 2026-11-26,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,Rad 5,540d xDrive · 223 kW,Diesel,BMW 540d xDrive Touring,Nové,,0,47586,101822,,75444,7
 2026-11-26,Weby dealerov,Nové v ponuke,T.O.B. + MD-Bavaria,iX1,iX1 30 xDrive · 225 kW,Elektro,BMW iX1 xDrive30,Jazdené,2023,46934,WBY61EF0605X82012,53699,,36990,1
