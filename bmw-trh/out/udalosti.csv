@@ -1,4 +1,41 @@
 datum,zdroj,udalost,dealer,model,motorizacia,palivo,nazov,typ,rok,km,vin,cennikova_cena,cena_pred,cena_po,dni_v_ponuke
+2026-11-28,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,Rad 5,540d xDrive · 223 kW,Diesel,BMW 540d xDrive Touring,Nové,,0,47588,101029,,74858,9
+2026-11-28,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,iX1,iX1 30 xDrive · 225 kW,Elektro,BMW iX1 xDrive30,Manažérske,2023,46934,WBY61EF0605X82012,57542,,36990,3
+2026-11-28,Weby dealerov,Zmena ceny,T.O.B. + MD-Bavaria,X2,X2 20d xDrive · 110 kW,Diesel,BMW X2 xDrive20d,Manažérske,2025,22879,WBA51GN0705272517,61180,41990,41500,346
+2026-11-28,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,X3,X3 20 xDrive · 140 kW,Benzín,BMW X3 20 xDrive,Manažérske,2025,12474,WBA35GP050N380224,69327,,52990,52
+2026-11-28,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,X3,X3 30e xDrive · 220 kW,Hybrid,BMW X3 30e xDrive,Nové,,0,WBA65GP050N470146,81035,,69980,9
+2026-11-28,Weby dealerov,Zmena ceny,T.O.B. + MD-Bavaria,X3,X3 30e xDrive · 220 kW,Hybrid,BMW X3 30e xDrive,Nové,,0,WBA65GP070N406920,88523,77938,73938,9
+2026-11-28,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,X5,X5 40i xDrive · 280 kW,Benzín,BMW X5 xDrive40i,Jazdené,2026,4106,WBA21EU0909114388,112537,,78887,37
+2026-11-28,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,X6,X6 30d xDrive · 219 kW,Diesel,BMW X6 xDrive30d,Nové,,0,72868,119948,,88858,9
+2026-11-28,Weby dealerov,Zmena ceny,T.O.B. + MD-Bavaria,X7,X7 40i xDrive · 280 kW,Benzín,BMW X7 xDrive40i,Nové,,0,WBA21EM0309343133,134359,112990,108874,9
+2026-11-28,Weby dealerov,Zmena ceny,T.O.B. + MD-Bavaria,X7,X7 40i xDrive · 280 kW,Benzín,BMW X7 xDrive40i,Nové,,0,WBA21EM0009499873,144879,122990,118188,9
+2026-11-28,Weby dealerov,Zmena ceny,T.O.B. + MD-Bavaria,X7,X7 40d xDrive · 259 kW,Diesel,BMW X7 xDrive40d,Nové,,0,WBA21EN0309493189,147346,123990,119990,9
+2026-11-28,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,iX,iX 45 xDrive · 300 kW,Elektro,BMW iX xDrive45,Manažérske,2026,6323,WBY41CF0X0CX54902,93088,,68950,39
+2026-11-28,Weby dealerov,Odstránené (už predané),T.O.B. + MD-Bavaria,X1,X1 20i sDrive · 125 kW,Benzín,BMW X1 sDrive20i,Predvádzacie,2026,4001,WBA31EE0405680453,58317,,,9
+2026-11-28,Weby dealerov,Odstránené (už predané),T.O.B. + MD-Bavaria,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Manažérske,2025,9509,WBA15GR090N366640,72404,54500,,66
+2026-11-28,Weby dealerov,Zmizlo z ponuky (predané),T.O.B. + MD-Bavaria,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Jazdené,,4025,WBA15GR0X0N394947,79746,59990,,40
+2026-11-28,Weby dealerov,Zmizlo z ponuky (predané),T.O.B. + MD-Bavaria,X7,X7 40d xDrive · 259 kW,Diesel,BMW X7 xDrive40d,Jazdené,2025,23750,WBA21EN0709145024,139431,97500,,148
+2026-11-28,Weby dealerov,Zmizlo z ponuky (predané),T.O.B. + MD-Bavaria,X7,X7 40d xDrive · 259 kW,Diesel,BMW X7 xDrive40d,Nové,,0,WBA21EN0809621698,132422,106952,,9
+2026-11-28,Weby dealerov,Odstránené (už predané),T.O.B. + MD-Bavaria,iX,iX 60 xDrive · 400 kW,Elektro,BMW iX xDrive60,Predvádzacie,2025,13241,WBY51CF090CW18135,128433,,,292
+2026-11-28,Weby dealerov,Nové v ponuke,Regnum PO + KE,M4,M4 M Competition xDrive · 375 kW,Benzín,BMW M4 Competition xDrive,Jazdené,2022,55275,WBS41AZ020CL21276,,,65000,0
+2026-11-28,Weby dealerov,Rezervované,RIJA - Bavaria,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2023,74000,WBA11EV0309S25819,,,60900,8
+2026-11-28,Weby dealerov,Zmena ceny,RIJA - Bavaria,iX3,iX3 40 · 235 kW,Elektro,BMW iX3 40 [Neue Klasse],Predvádzacie,2026,4001,WBA11HR000DA67516,83135,69900,71900,50
+2026-11-28,Weby dealerov,Zmizlo z ponuky (predané),RIJA - Bavaria,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2026,20600,WBA11EV0609342424,121998,79900,,9
+2026-11-28,Weby dealerov,Zmizlo z ponuky (predané),Bavaria BA + TT,X1,X1 20d xDrive · 110 kW,Diesel,BMW X1 xDrive20d,Jazdené,2025,21344,WBA41EG0605336091,57075,41990,,47
+2026-11-28,Weby dealerov,Zmizlo z ponuky (predané),Bavaria BA + TT,X7,X7 40d xDrive · 250 kW,Diesel,BMW X7 xDrive40d,Jazdené,2024,73196,WBA21EN0209T54297,140030,75000,,136
+2026-11-28,Weby dealerov,Nové v ponuke,Auto Palace Bratislava,X5,X5 50e xDrive · 360 kW,Hybrid,BMW X5 xDrive50e Individual,Predvádzacie,2024,79000,WBA41EU0509V40216,125530,,66999,1
+2026-11-28,Weby dealerov,Zmizlo z ponuky (predané),Auto Palace Bratislava,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2025,26300,WBA11EV0809Z38022,,71999,,5
+2026-11-28,Portál BMW (jazdené),Zmena ceny,RIJA - Bavaria,iX3,iX3 40 · 235 kW,Elektro,BMW iX3 40,Jazdené,2026,4001,WBA11HR000DA67516,83135,69900,71900,50
+2026-11-28,Portál BMW (jazdené),Zmena ceny,MD-Bavaria Žilina,X2,X2 20d xDrive · 110 kW,Diesel,BMW X2 xDrive20d,Jazdené,2025,22879,WBA51GN0705272517,61180,41990,41500,346
+2026-11-28,Portál BMW (jazdené),Zmizlo z ponuky (predané),MD-Bavaria Žilina,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Jazdené,2025,4025,WBA15GR0X0N394947,79746,59990,,40
+2026-11-28,Portál BMW (jazdené),Zmizlo z ponuky (predané),MD-Bavaria Žilina,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Jazdené,2025,9509,WBA15GR090N366640,72404,54500,,66
+2026-11-28,Portál BMW (jazdené),Zmizlo z ponuky (predané),MD-Bavaria Žilina,X7,X7 40d xDrive · 250 kW,Diesel,BMW X7 xDrive40d,Jazdené,2025,23750,WBA21EN0709145024,139431,97500,,148
+2026-11-28,Portál BMW (jazdené),Zmizlo z ponuky (predané),Bavaria TT,X1,X1 20d xDrive · 110 kW,Diesel,BMW X1 xDrive20d,Jazdené,2025,21344,WBA41EG0605336091,56705,41990,,47
+2026-11-28,Portál BMW (jazdené),Zmizlo z ponuky (predané),Bavaria TT,iX1,iX1 30 xDrive · 225 kW,Elektro,BMW iX1 xDrive30,Jazdené,2024,46272,WBY61EF0405Y69407,70933,39900,,26
+2026-11-28,Portál BMW (jazdené),Zmizlo z ponuky (predané),BAVARIA Bratislava,X1,X1 23d xDrive · 145 kW,Diesel,BMW X1 xDrive23d,Jazdené,2023,64811,WBA51EG0105W66029,60400,32900,,47
+2026-11-28,Portál BMW (jazdené),Zmizlo z ponuky (predané),BAVARIA Bratislava,Rad 7,750e xDrive · 230 kW,Hybrid,BMW 750e xDrive,Jazdené,2024,19010,WBA41EH040CU33753,173066,106900,,138
+2026-11-28,Portál BMW (jazdené),Nové v ponuke,Auto Palace Bratislava,X5,X5 50e xDrive · 230 kW,Hybrid,BMW X5 xDrive50e,Jazdené,2024,79000,WBA41EU0509V40216,125160,,66999,1
+2026-11-28,Portál BMW (jazdené),Zmizlo z ponuky (predané),Auto Palace Bratislava,X5,X5 30d xDrive · 210 kW,Diesel,BMW X5 xDrive30d,Jazdené,2025,26300,WBA11EV0809Z38022,,71999,,5
 2026-11-27,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,Rad 5,540d xDrive · 223 kW,Diesel,BMW 540d xDrive Sedan,Nové,,0,47597,103448,,79740,8
 2026-11-27,Weby dealerov,Rezervované,T.O.B. + MD-Bavaria,X1,X1 20i sDrive · 125 kW,Benzín,BMW X1 sDrive20i,Nové,,0,47589,65931,,48885,8
 2026-11-27,Weby dealerov,Označené ako predané,T.O.B. + MD-Bavaria,X3,X3 20d xDrive · 145 kW,Diesel,BMW X3 20d xDrive,Manažérske,2025,9509,WBA15GR090N366640,72404,,54500,65
